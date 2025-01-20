@@ -1,4 +1,4 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.handlers;
+package com.br.maisprati.squad16.EncontreMeuPet.application.handlers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

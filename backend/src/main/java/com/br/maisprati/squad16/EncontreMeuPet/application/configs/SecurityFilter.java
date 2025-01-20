@@ -1,7 +1,7 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.configs;
+package com.br.maisprati.squad16.EncontreMeuPet.application.configs;
 
-import com.br.maisprati.squad16.LanceNoTempo.application.services.AuthorizationService;
-import com.br.maisprati.squad16.LanceNoTempo.application.services.TokenService;
+import com.br.maisprati.squad16.EncontreMeuPet.application.services.AuthorizationService;
+import com.br.maisprati.squad16.EncontreMeuPet.application.services.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

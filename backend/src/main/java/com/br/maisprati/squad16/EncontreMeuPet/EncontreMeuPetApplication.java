@@ -1,13 +1,13 @@
-package com.br.maisprati.squad16.LanceNoTempo;
+package com.br.maisprati.squad16.EncontreMeuPet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LanceNoTempoApplication {
+public class EncontreMeuPetApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LanceNoTempoApplication.class, args);
+		SpringApplication.run(EncontreMeuPetApplication.class, args);
 	}
 
 }

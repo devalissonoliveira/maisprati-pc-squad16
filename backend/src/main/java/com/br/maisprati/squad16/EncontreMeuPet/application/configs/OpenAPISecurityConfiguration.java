@@ -1,4 +1,4 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.configs;
+package com.br.maisprati.squad16.EncontreMeuPet.application.configs;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;

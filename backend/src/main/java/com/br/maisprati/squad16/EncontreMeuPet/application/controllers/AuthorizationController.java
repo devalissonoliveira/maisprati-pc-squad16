@@ -1,11 +1,11 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.controllers;
+package com.br.maisprati.squad16.EncontreMeuPet.application.controllers;
 
-import com.br.maisprati.squad16.LanceNoTempo.application.requests.LoginRequest;
-import com.br.maisprati.squad16.LanceNoTempo.application.requests.RegisterRequest;
-import com.br.maisprati.squad16.LanceNoTempo.application.services.TokenService;
-import com.br.maisprati.squad16.LanceNoTempo.domain.enums.Roles;
-import com.br.maisprati.squad16.LanceNoTempo.domain.models.User;
-import com.br.maisprati.squad16.LanceNoTempo.domain.repositories.UserRepository;
+import com.br.maisprati.squad16.EncontreMeuPet.application.requests.LoginRequest;
+import com.br.maisprati.squad16.EncontreMeuPet.application.requests.RegisterRequest;
+import com.br.maisprati.squad16.EncontreMeuPet.application.services.TokenService;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

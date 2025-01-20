@@ -1,10 +1,10 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.services;
+package com.br.maisprati.squad16.EncontreMeuPet.application.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.br.maisprati.squad16.LanceNoTempo.domain.models.User;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

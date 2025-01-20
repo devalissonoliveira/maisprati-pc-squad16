@@ -1,8 +1,8 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.seeders;
+package com.br.maisprati.squad16.EncontreMeuPet.application.seeders;
 
-import com.br.maisprati.squad16.LanceNoTempo.domain.enums.Roles;
-import com.br.maisprati.squad16.LanceNoTempo.domain.models.User;
-import com.br.maisprati.squad16.LanceNoTempo.domain.repositories.UserRepository;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;

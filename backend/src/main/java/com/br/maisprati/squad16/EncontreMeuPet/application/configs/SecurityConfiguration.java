@@ -1,8 +1,8 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.configs;
+package com.br.maisprati.squad16.EncontreMeuPet.application.configs;
 
 
-import com.br.maisprati.squad16.LanceNoTempo.application.handlers.AccessDeniedHandler;
-import com.br.maisprati.squad16.LanceNoTempo.application.handlers.JWTAuthenticationEntryPoint;
+import com.br.maisprati.squad16.EncontreMeuPet.application.handlers.AccessDeniedHandler;
+import com.br.maisprati.squad16.EncontreMeuPet.application.handlers.JWTAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

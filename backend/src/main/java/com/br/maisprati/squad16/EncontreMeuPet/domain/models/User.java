@@ -1,6 +1,6 @@
-package com.br.maisprati.squad16.LanceNoTempo.domain.models;
+package com.br.maisprati.squad16.EncontreMeuPet.domain.models;
 
-import com.br.maisprati.squad16.LanceNoTempo.domain.enums.Roles;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

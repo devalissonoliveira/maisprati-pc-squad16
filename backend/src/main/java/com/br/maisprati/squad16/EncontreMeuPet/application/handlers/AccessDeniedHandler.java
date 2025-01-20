@@ -1,4 +1,4 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.handlers;
+package com.br.maisprati.squad16.EncontreMeuPet.application.handlers;
 
 import io.swagger.v3.core.util.Json;
 import jakarta.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.br.maisprati.squad16.LanceNoTempo.domain.enums;
+package com.br.maisprati.squad16.EncontreMeuPet.domain.enums;
 
 public enum Roles {
     USER("USER"),

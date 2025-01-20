@@ -1,10 +1,10 @@
-package com.br.maisprati.squad16.LanceNoTempo;
+package com.br.maisprati.squad16.EncontreMeuPet;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LanceNoTempoApplicationTests {
+class EncontreMeuPetApplicationTests {
 
 	@Test
 	void contextLoads() {

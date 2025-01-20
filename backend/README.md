@@ -17,8 +17,8 @@ Verifique o arquivo application.properties no caminho:
 
 E troque as credenciais abaixo com as credenciais do seu banco de dados
 ```sh
-#O "lance_tempo" é o nome do seu banco de dados
-spring.jpa.properties.hibernate.connection.url=jdbc:postgresql://localhost:5432/lance_tempo 
+#O "encontre_pet" é o nome do seu banco de dados
+spring.jpa.properties.hibernate.connection.url=jdbc:postgresql://localhost:5432/encontre_pet
 spring.jpa.database=postgresql # Conector do Banco de Dados, mysql, sqlserver, postgres
 spring.jpa.properties.hibernate.connection.password=postgres # Senha do banco
 spring.jpa.properties.hibernate.connection.username=postgres # Usuário do banco

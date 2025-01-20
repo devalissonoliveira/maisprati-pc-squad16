@@ -1,6 +1,6 @@
-package com.br.maisprati.squad16.LanceNoTempo.domain.repositories;
+package com.br.maisprati.squad16.EncontreMeuPet.domain.repositories;
 
-import com.br.maisprati.squad16.LanceNoTempo.domain.models.User;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 

@@ -1,6 +1,6 @@
-package com.br.maisprati.squad16.LanceNoTempo.application.services;
+package com.br.maisprati.squad16.EncontreMeuPet.application.services;
 
-import com.br.maisprati.squad16.LanceNoTempo.domain.repositories.UserRepository;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

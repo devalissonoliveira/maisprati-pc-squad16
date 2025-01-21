@@ -57,7 +57,7 @@ function Register() {
                 </label>
                 <div class="mt-2">
                   <input
-                    type="name"
+                    type="text"
                     name="name"
                     id="name"
                     placeholder="Tótó..."
@@ -79,7 +79,7 @@ function Register() {
                 </div>
                 <div class="mt-2">
                   <input
-                    type="species"
+                    type="text"
                     name="species"
                     id="species"
                     placeholder="Cão, Gato, Papagaio..."
@@ -93,18 +93,115 @@ function Register() {
               <div>
                 <div class="flex items-center justify-between">
                   <label
-                    for="Race"
+                    for="race"
                     class="block text-sm/6 font-medium text-gray-900 capitalize"
                   >
-                    Race
+                    race
+                  </label>
+                </div>
+                <div class="mt-2">
+                  <input
+                    type="text"
+                    name="race"
+                    id="race"
+                    placeholder="Shih tzu, Pastor Alemão..."
+                    autocomplete="current-password"
+                    required
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  />
+                </div>
+              </div>
+
+              {/* campo de idade e pedigre */}
+
+              <div className="flex flex-row gap-8">
+                <div>
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="idade"
+                      class="block text-sm/6 font-medium text-gray-900 capitalize"
+                    >
+                      idade
+                    </label>
+                  </div>
+                  <div class="mt-2">
+                    <input
+                      type="text"
+                      name="idade"
+                      id="idade"
+                      placeholder="Shih tzu, Pastor Alemão..."
+                      autocomplete="current-password"
+                      required
+                      class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div class="items-center">
+                    <label
+                      for="pedigre"
+                      class="block text-sm/6 font-medium text-gray-900 capitalize"
+                    >
+                      pedigre
+                    </label>
+                  </div>
+                  <div class="flex flex-grow gap-6 mt-2">
+                    <div className="flex flex-row items-center gap-1">
+                      <label
+                        for="yes"
+                        class="block text-sm/6 font-medium text-gray-900 capitalize"
+                      >
+                        yes
+                      </label>
+                      <input
+                        type="checkbox"
+                        name="yes"
+                        id="yes"
+                        placeholder="Shih tzu, Pastor Alemão..."
+                        autocomplete="current-password"
+                        required
+                        // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      />
+                    </div>
+                    <div className="flex flex-row items-center gap-1">
+                      <label
+                        for="no"
+                        class="block text-sm/6 font-medium text-gray-900 capitalize"
+                      >
+                        no
+                      </label>
+                      <input
+                        type="checkbox"
+                        name="no"
+                        id="no"
+                        placeholder="Shih tzu, Pastor Alemão..."
+                        autocomplete="current-password"
+                        required
+                        // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* fim do campo idade/pedigre */}
+
+              <div>
+                <div class="flex items-center justify-between">
+                  <label
+                    for="observations"
+                    class="block text-sm/6 font-medium text-gray-900 capitalize"
+                  >
+                    Observations
                   </label>
                 </div>
 
                 <div class="mt-2">
                   <textarea
-                    rows="7" 
+                    rows="7"
                     maxlength="512"
-                    id="Race"
+                    id="observations"
                     placeholder="Digite suas observações aqui..."
                     class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 h-60 resize-none"
                   />

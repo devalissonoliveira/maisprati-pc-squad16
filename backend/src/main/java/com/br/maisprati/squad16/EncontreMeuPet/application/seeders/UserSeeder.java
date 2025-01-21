@@ -29,6 +29,7 @@ public class UserSeeder implements CommandLineRunner {
         if(this.adminPassword == null) return;
         if(this.userRepository.count() > 0) return;
         var user = new User();
+        user.setPhone("00000000");
         user.setEmail(this.adminEmail);
         user.setName(this.adminEmail);
         user.setRole(Roles.ADMIN);

@@ -62,7 +62,7 @@ public class AuthorizationController {
         user.setRole(Roles.USER);
         var data = this.userRepository.save(user);
         return ResponseEntity.ok(new Object() {
-            public Long id = data.getId();
+            public Long id = data.getUserId();
             public String email = data.getUsername();
         });
     }

@@ -1,6 +1,6 @@
 // import { Container } from './styles';
 
-function Login() {
+function Register() {
   return (
     <>
       {/* Logo do lado direito */}
@@ -42,7 +42,7 @@ function Login() {
         <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-              Sign in to your account
+              Register your Pet
             </h2>
           </div>
 
@@ -51,16 +51,17 @@ function Login() {
               <div>
                 <label
                   for="email"
-                  class="block text-sm/6 font-medium text-gray-900"
+                  class="block text-start text-sm/6 font-medium text-gray-900"
                 >
-                  User address
+                  Name of pet
                 </label>
                 <div class="mt-2">
                   <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    autocomplete="email"
+                    type="name"
+                    name="name"
+                    id="name"
+                    placeholder="Tótó..."
+                    autocomplete="name"
                     required
                     class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
@@ -70,25 +71,18 @@ function Login() {
               <div>
                 <div class="flex items-center justify-between">
                   <label
-                    for="password"
-                    class="block text-sm/6 font-medium text-gray-900"
+                    for="species"
+                    class="block text-sm/6 font-medium text-gray-900 capitalize"
                   >
-                    Password
+                    species
                   </label>
-                  <div class="text-sm">
-                    <a
-                      href="#"
-                      class="font-semibold text-indigo-600 hover:text-blue-700"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
                 </div>
                 <div class="mt-2">
                   <input
-                    type="password"
-                    name="password"
-                    id="password"
+                    type="species"
+                    name="species"
+                    id="species"
+                    placeholder="Cão, Gato, Papagaio..."
                     autocomplete="current-password"
                     required
                     class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -97,24 +91,34 @@ function Login() {
               </div>
 
               <div>
+                <div class="flex items-center justify-between">
+                  <label
+                    for="Race"
+                    class="block text-sm/6 font-medium text-gray-900 capitalize"
+                  >
+                    Race
+                  </label>
+                </div>
+
+                <div class="mt-2">
+                  <textarea
+                    rows="7" 
+                    maxlength="512"
+                    id="Race"
+                    placeholder="Digite suas observações aqui..."
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 h-60 resize-none"
+                  />
+                </div>
+              </div>
+              <div>
                 <button
                   type="submit"
                   class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Sign in
+                  Register Pet
                 </button>
               </div>
             </form>
-
-            <p class="mt-10 text-center text-sm/6 text-gray-500">
-              Not a member?
-              <a
-                href="#"
-                class="font-semibold text-indigo-600 hover:text-indigo-500"
-              >
-                Register
-              </a>
-            </p>
           </div>
         </div>
       </section>
@@ -122,4 +126,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

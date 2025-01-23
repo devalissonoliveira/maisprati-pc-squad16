@@ -1,6 +1,10 @@
 // import { Container } from './styles';
 
 function Register() {
+  function handleAddfile(e) {
+    document.getElementById("file-name").textContent = e.target.value;
+    console.log(e);
+  }
   return (
     <>
       {/* Logo do lado direito */}
@@ -194,10 +198,12 @@ function Register() {
                   <span className="capitalize">pedigre</span>, anexe o documento
                   em <span className="uppercase">pdf</span> aqui.
                 </p>
-                <div>
+                <div className="flex gap-6 w-full">
                   <label
+                    id="anexar-file"
                     for="pedgre"
-                    class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 capitalize hover:cursor-pointer "
+                    onChange={handleAddfile}
+                    class="flex w-40 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 capitalize hover:cursor-pointer "
                   >
                     anexar arquivo
                   </label>
@@ -205,8 +211,12 @@ function Register() {
                     type="file"
                     name="pedgre"
                     id="pedgre"
+                    onChange={handleAddfile}
                     className="hidden"
                   />
+                  <span className="text-black" id="file-name">
+                    asda
+                  </span>
                 </div>
               </div>
 

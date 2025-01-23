@@ -187,6 +187,29 @@ function Register() {
 
               {/* fim do campo idade/pedigre */}
 
+              <div class="flex flex-col items-start justify-between">
+                <p className="text-start">
+                  {" "}
+                  <span className="capitalize">se</span> possuir{" "}
+                  <span className="capitalize">pedigre</span>, anexe o documento
+                  em <span className="uppercase">pdf</span> aqui.
+                </p>
+                <div>
+                  <label
+                    for="pedgre"
+                    class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 capitalize hover:cursor-pointer "
+                  >
+                    anexar arquivo
+                  </label>
+                  <input
+                    type="file"
+                    name="pedgre"
+                    id="pedgre"
+                    className="hidden"
+                  />
+                </div>
+              </div>
+
               <div>
                 <div class="flex items-center justify-between">
                   <label

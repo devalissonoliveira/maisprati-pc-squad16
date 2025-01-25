@@ -9,41 +9,9 @@ function Register() {
     <>
       {/* Logo do lado direito */}
       <section className="flex flex-col">
-        <div className="flex items-center">
-          <div className="text-lg font-bold">
-            <a href="#logo" className="hover:text-blue-700">
-              MinhaLogo
-            </a>
-          </div>
-          <nav className="flex items-center justify-between px-6 py-4 text-blue-950">
-            {/* Links do lado esquerdo */}
-            <ul className="flex space-x-6">
-              <li>
-                <a href="#home" className="hover:text-blue-700">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#como-funciona" className="hover:text-blue-700">
-                  Como funciona
-                </a>
-              </li>
-              <li>
-                <a href="#plano" className="hover:text-blue-700">
-                  Plano
-                </a>
-              </li>
-              <li>
-                <a href="#contato" className="hover:text-blue-700">
-                  Contato
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
 
         {/* Section de login */}
-        <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="flex min-h-full flex-col justify-center px-6 py-4 lg:px-8">
           <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
               Register your Pet

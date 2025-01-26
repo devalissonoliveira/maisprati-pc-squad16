@@ -41,9 +41,9 @@ public class PlanController {
             @RequestBody @Valid CreatePlanRequest createPlanRequest
     ) {
         var plan = planService.create(
-                createPlanRequest.toModel()
+                createPlanRequest.toDTO()
         );
-        return ResponseEntity.status(HttpStatus.CREATED).body(PlanDTO.fromPlanModel(plan));
+        return ResponseEntity.status(HttpStatus.CREATED).body(plan);
     }
 
     @PutMapping("/{id}")
@@ -61,8 +61,8 @@ public class PlanController {
             return ResponseEntity.notFound().build();
         }
         planService.update(
-                plan.get(),
-                updatePlanRequest.toUpdateDTO()
+                id,
+                updatePlanRequest.toDTO()
         );
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -76,15 +76,13 @@ public class PlanController {
         if (e.equals(ActiveQuery.BOTH)) {
             return ResponseEntity.ok(
                     this.planService.all()
-                            .stream().map(PlanDTO::fromPlanModel)
-                            .collect(Collectors.toList())
+
             );
         }
 
         return ResponseEntity.ok(
                 this.planService.allActive(e.equals(ActiveQuery.ACTIVE))
-                        .stream().map(PlanDTO::fromPlanModel)
-                        .collect(Collectors.toList())
+
         );
     }
 
@@ -93,8 +91,8 @@ public class PlanController {
     public ResponseEntity<PlanDTO> findById(
             @PathVariable Long id
     ) {
-        var planDTO = this.planService.findById(id);
-        return planDTO.map(PlanDTO::fromPlanModel)
+        var plan = this.planService.findById(id);
+        return plan
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound()
                         .build());

@@ -1,5 +1,6 @@
 package com.br.maisprati.squad16.EncontreMeuPet.application.requests;
 
+import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.PlanDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Plan;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -44,5 +45,22 @@ public record CreatePlanRequest(
         plan.setMonthlyPrice(request.monthlyPrice);
         plan.setActive(true);
         return plan;
+    }
+    public PlanDTO toDTO ()
+    {
+        return CreatePlanRequest.fromRequestToDTO(this);
+    }
+    public static PlanDTO fromRequestToDTO(CreatePlanRequest request)
+    {
+        return new PlanDTO(
+                null,
+                request.name,
+                request.description,
+                request.monthlyPrice,
+                request.annualPrice,
+                request.minPets,
+                request.maxPets,
+                true
+        );
     }
 }

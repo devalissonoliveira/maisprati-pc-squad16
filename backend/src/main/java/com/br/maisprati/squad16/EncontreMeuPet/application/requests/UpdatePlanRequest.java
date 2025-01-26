@@ -1,6 +1,6 @@
 package com.br.maisprati.squad16.EncontreMeuPet.application.requests;
 
-import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.PlanUpdateDTO;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.PlanDTO;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,12 +26,13 @@ public record UpdatePlanRequest(
         @NotNull
         Boolean active
 ) {
-    public PlanUpdateDTO toUpdateDTO() {
+    public PlanDTO toDTO() {
         return UpdatePlanRequest.fromRequest(this);
     }
-    public static PlanUpdateDTO fromRequest(UpdatePlanRequest request)
+    public static PlanDTO fromRequest(UpdatePlanRequest request)
     {
-        return new PlanUpdateDTO(
+        return new PlanDTO(
+                null,
                 request.name(),
                 request.description(),
                 request.monthlyPrice(),

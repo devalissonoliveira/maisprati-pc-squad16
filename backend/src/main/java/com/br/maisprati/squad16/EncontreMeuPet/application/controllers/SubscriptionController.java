@@ -1,11 +1,14 @@
 package com.br.maisprati.squad16.EncontreMeuPet.application.controllers;
 
+import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CancelSubscriptionRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CreateSubscriptionRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.ApplicationException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionAlreadyExistsException;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionDateInvalidException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.services.SubscriptionService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -27,10 +30,13 @@ public class SubscriptionController {
     }
 
     @PostMapping
+    @Operation(
+            description = "Create a subscription"
+    )
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<SubscriptionDTO> create(
             @RequestBody @Valid CreateSubscriptionRequest subscriptionDTO
-    ) throws SubscriptionAlreadyExistsException {
+    ) throws ApplicationException, SubscriptionDateInvalidException {
         var sub = this.subscriptionService.create(
                 CreateSubscriptionRequest.toDTO(
                         subscriptionDTO,
@@ -41,10 +47,27 @@ public class SubscriptionController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @ApiResponse(description = "Get all subscriptions")
+    @ApiResponse(description = "All subscriptions associated to the user")
     public ResponseEntity<List<SubscriptionDTO>> getAll() {
         return ResponseEntity.ok(this.subscriptionService.findAll(
                 (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
         ));
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(
+            description = "Cancel a subscription"
+    )
+    public ResponseEntity<?> cancel(
+            @PathVariable Long id,
+            @RequestBody @Valid CancelSubscriptionRequest request
+    ) {
+
+        this.subscriptionService.cancel(
+                CancelSubscriptionRequest.toDTO(request, id),
+                (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+        );
+        return ResponseEntity.noContent().build();
     }
 }

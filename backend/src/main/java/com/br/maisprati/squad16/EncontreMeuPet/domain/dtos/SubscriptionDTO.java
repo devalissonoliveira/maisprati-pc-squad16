@@ -64,4 +64,9 @@ public record SubscriptionDTO(
         sub.setPlan(plan);
         return sub;
     }
+    public boolean isValidRangeDate()
+    {
+        var model = SubscriptionDTO.toModel(this);
+        return  model.getStartDate().isBefore(model.getEndDate());
+    }
 }

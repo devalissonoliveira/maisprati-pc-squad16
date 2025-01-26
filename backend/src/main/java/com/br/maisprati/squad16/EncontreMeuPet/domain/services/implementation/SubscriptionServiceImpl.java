@@ -4,6 +4,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.SubscriptionStatus;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionAlreadyExistsException;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionDateInvalidException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Subscription;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.PlanRepository;
@@ -33,7 +34,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public SubscriptionDTO create(SubscriptionDTO subscription) throws SubscriptionAlreadyExistsException {
+    public SubscriptionDTO create(SubscriptionDTO subscription) throws SubscriptionAlreadyExistsException, SubscriptionDateInvalidException {
+        if(!subscription.isValidRangeDate()){
+            throw new SubscriptionDateInvalidException(
+                    subscription.startDate(),
+                    subscription.endDate()
+            );
+        }
         var user = this.userRepository.findById(subscription.userId()).get();
         var alreadyExists = this.subscriptionRepository.findByStatusAndUser(
                 SubscriptionStatus.ACTIVE,
@@ -75,16 +82,20 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public boolean cancel(Long subscriptionId, LocalDate date, String cancellationReason) {
-        var subscription = this.subscriptionRepository.findById(subscriptionId).get();
+    public boolean cancel(SubscriptionDTO subscriptionDTO, User user) {
+        var subscriptionD = this.subscriptionRepository.findBySubscriptionIdAndUser(subscriptionDTO.subscriptionId(), user);
+        if(subscriptionD.isEmpty()){
+            return false;
+        }
+        var subscription = subscriptionD.get();
         if (subscription.getStatus().equals(SubscriptionStatus.CANCELLED)) {
             return false;
         }
         subscription.setStatus(
                 SubscriptionStatus.CANCELLED
         );
-        subscription.setCancellationDate(date);
-        subscription.setCancellationReason(cancellationReason);
+        subscription.setCancellationDate(subscriptionDTO.cancellationDate());
+        subscription.setCancellationReason(subscriptionDTO.cancellationReason());
         this.subscriptionRepository.saveAndFlush(subscription);
         return true;
     }

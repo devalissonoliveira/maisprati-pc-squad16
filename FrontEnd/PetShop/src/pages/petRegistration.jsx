@@ -1,6 +1,12 @@
-// import { Container } from './styles';
+import React, { useState } from "react";
 
 function Register() {
+  const [selected, setSelected] = useState(""); // Controla qual checkbox está selecionado
+
+  const handleCheckboxChange = (option) => {
+    setSelected(option); // Desmarca se já estiver selecionado
+  };
+
   function handleAddfile(e) {
     document.getElementById("file-name").textContent = e.target.value;
     console.log(e);
@@ -43,45 +49,44 @@ function Register() {
         </div>
 
         {/* Section de login */}
-        <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-          <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
               Register your Pet
             </h2>
           </div>
 
-          <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form className="space-y-6" action="#" method="POST">
               <div>
                 <label
                   for="email"
-                  class="block text-start text-sm/6 font-medium text-gray-900"
+                  className="block text-start text-sm/6 font-medium text-gray-900"
                 >
                   Name of pet
                 </label>
-                <div class="mt-2">
+                <div className="mt-2">
                   <input
                     type="text"
                     name="name"
                     id="name"
                     placeholder="Tótó..."
-                    autocomplete="name"
                     required
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
               </div>
 
               <div>
-                <div class="flex items-center justify-between">
+                <div className="flex items-center justify-between">
                   <label
                     for="species"
-                    class="block text-sm/6 font-medium text-gray-900 capitalize"
+                    className="block text-sm/6 font-medium text-gray-900 capitalize"
                   >
                     species
                   </label>
                 </div>
-                <div class="mt-2">
+                <div className="mt-2">
                   <input
                     type="text"
                     name="species"
@@ -89,21 +94,21 @@ function Register() {
                     placeholder="Cão, Gato, Papagaio..."
                     autocomplete="current-password"
                     required
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
               </div>
 
               <div>
-                <div class="flex items-center justify-between">
+                <div className="flex items-center justify-between">
                   <label
                     for="race"
-                    class="block text-sm/6 font-medium text-gray-900 capitalize"
+                    className="block text-sm/6 font-medium text-gray-900 capitalize"
                   >
                     race
                   </label>
                 </div>
-                <div class="mt-2">
+                <div className="mt-2">
                   <input
                     type="text"
                     name="race"
@@ -111,7 +116,7 @@ function Register() {
                     placeholder="Shih tzu, Pastor Alemão..."
                     autocomplete="current-password"
                     required
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
               </div>
@@ -120,15 +125,15 @@ function Register() {
 
               <div className="flex flex-row gap-8">
                 <div>
-                  <div class="flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <label
                       for="idade"
-                      class="block text-sm/6 font-medium text-gray-900 capitalize"
+                      className="block text-sm/6 font-medium text-gray-900 capitalize"
                     >
                       idade
                     </label>
                   </div>
-                  <div class="mt-2">
+                  <div className="mt-2">
                     <input
                       type="text"
                       name="idade"
@@ -136,35 +141,36 @@ function Register() {
                       placeholder="Shih tzu, Pastor Alemão..."
                       autocomplete="current-password"
                       required
-                      class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <div class="items-center">
+                  <div className="items-center">
                     <label
                       for="pedigre"
-                      class="block text-sm/6 font-medium text-gray-900 capitalize"
+                      className="block text-sm/6 font-medium text-gray-900 capitalize"
                     >
                       pedigre
                     </label>
                   </div>
-                  <div class="flex flex-grow gap-6 mt-2">
+                  <div className="flex flex-grow gap-6 mt-2">
                     <div className="flex flex-row items-center gap-1">
                       <label
                         for="yes"
-                        class="block text-sm/6 font-medium text-gray-900 capitalize"
+                        className="block text-sm/6 font-medium text-gray-900 capitalize"
                       >
                         yes
                       </label>
                       <input
                         type="checkbox"
-                        name="yes"
+                        name="option"
                         id="yes"
                         placeholder="Shih tzu, Pastor Alemão..."
-                        autocomplete="current-password"
                         required
+                        checked={selected === "option1"}
+                        onChange={()=> handleCheckboxChange("option1")}
                         // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       />
                     </div>
@@ -177,11 +183,12 @@ function Register() {
                       </label>
                       <input
                         type="checkbox"
-                        name="no"
+                        name="option"
                         id="no"
                         placeholder="Shih tzu, Pastor Alemão..."
-                        autocomplete="current-password"
                         required
+                        checked={selected === "option2"}
+                        onChange={() => handleCheckboxChange("option2")}
                         // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       />
                     </div>
@@ -211,39 +218,38 @@ function Register() {
                     type="file"
                     name="pedgre"
                     id="pedgre"
-                    onChange={handleAddfile}
                     className="hidden"
                   />
                   <span className="text-black" id="file-name">
-                    asda
+                    Name or file here...
                   </span>
                 </div>
               </div>
 
               <div>
-                <div class="flex items-center justify-between">
+                <div className="flex items-center justify-between">
                   <label
                     for="observations"
-                    class="block text-sm/6 font-medium text-gray-900 capitalize"
+                    className="block text-sm/6 font-medium text-gray-900 capitalize"
                   >
                     Observations
                   </label>
                 </div>
 
-                <div class="mt-2">
+                <div className="mt-2">
                   <textarea
                     rows="7"
-                    maxlength="512"
+                    maxLength="512"
                     id="observations"
                     placeholder="Digite suas observações aqui..."
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 h-60 resize-none"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 h-60 resize-none"
                   />
                 </div>
               </div>
               <div>
                 <button
                   type="submit"
-                  class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Register Pet
                 </button>

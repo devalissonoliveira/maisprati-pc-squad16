@@ -5,6 +5,14 @@ function Register() {
 
   const handleCheckboxChange = (option) => {
     setSelected(option); // Desmarca se já estiver selecionado
+
+    if (option === "yes") {
+      document.getElementById("warreperContentDoc").classList.remove("hidden");
+      document.getElementById("warreperContentDoc").classList.add("inline");
+    }else{
+      document.getElementById("warreperContentDoc").classList.remove("inline");
+      document.getElementById("warreperContentDoc").classList.add("hidden");
+    }
   };
 
   function handleAddfile(e) {
@@ -165,12 +173,12 @@ function Register() {
                       </label>
                       <input
                         type="checkbox"
-                        name="option"
+                        name="yes"
                         id="yes"
                         placeholder="Shih tzu, Pastor Alemão..."
                         required
-                        checked={selected === "option1"}
-                        onChange={()=> handleCheckboxChange("option1")}
+                        checked={selected === "yes"}
+                        onChange={() => handleCheckboxChange("yes")}
                         // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       />
                     </div>
@@ -183,12 +191,12 @@ function Register() {
                       </label>
                       <input
                         type="checkbox"
-                        name="option"
+                        name="no"
                         id="no"
                         placeholder="Shih tzu, Pastor Alemão..."
                         required
-                        checked={selected === "option2"}
-                        onChange={() => handleCheckboxChange("option2")}
+                        checked={selected === "no"}
+                        onChange={() => handleCheckboxChange("no")}
                         // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       />
                     </div>
@@ -198,7 +206,10 @@ function Register() {
 
               {/* fim do campo idade/pedigre */}
 
-              <div class="flex flex-col items-start justify-between">
+              <div
+                id="warreperContentDoc"
+                className="flex flex-col items-start justify-between hidden"
+              >
                 <p className="text-start">
                   {" "}
                   <span className="capitalize">se</span> possuir{" "}

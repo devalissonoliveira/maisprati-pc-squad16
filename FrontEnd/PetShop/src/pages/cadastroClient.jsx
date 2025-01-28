@@ -4,11 +4,19 @@ function cadastroClient() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [Email, setEmail] = useState("");
+  const [EmailError, setEmailError] = useState("");
+
+  function confirmedEmail(){
+    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    if(!regex.test(Email)){
+        setEmailError("Campo de email incorredo ou incompleto!")
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    alert("Enviou o formulario.");
     if (
       password != "" &&
       confirmPassword != "" &&
@@ -78,11 +86,22 @@ function cadastroClient() {
                 <input
                   id="email"
                   name="email"
-                  type="text"
+                  type="email"
+                  onChange={(e)=> setEmail(e.target.value)}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
             </div>
+            {EmailError && (
+              <div className="sm:col-span-full">
+                <span
+                  for="city"
+                  className="block text-sm/6 font-medium text-red-900"
+                >
+                  {EmailError}
+                </span>
+              </div>
+            )}
 
             {/* ENDEREÇO */}
 
@@ -247,24 +266,29 @@ function cadastroClient() {
               >
                 <span>confirmação</span> da senha
               </label>
-              <div id="confirPassword" className="mt-2">
+              <div className="mt-2">
                 <input
                   type="text"
                   name="city"
-                  id="city"
+                  id="confirPassword"
                   onChange={(e) => {
                     setConfirmPassword(e.target.value);
+                    handleChangerPassword;
                   }}
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  className={`block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6`}
                 />
               </div>
             </div>
-            {error && <div className='sm:col-span-full'>
-               <span
-               for="city"
-               className="block text-sm/6 font-medium text-red-900"
-               >{error}</span>
-           </div>}
+            {error && (
+              <div className="sm:col-span-full">
+                <span
+                  for="city"
+                  className="block text-sm/6 font-medium text-red-900"
+                >
+                  {error}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 

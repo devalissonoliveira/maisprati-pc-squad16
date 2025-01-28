@@ -208,7 +208,7 @@ function Register() {
 
               <div
                 id="warreperContentDoc"
-                className="flex flex-col items-start justify-between hidden"
+                className="flex-col items-start justify-between"
               >
                 <p className="text-start">
                   {" "}

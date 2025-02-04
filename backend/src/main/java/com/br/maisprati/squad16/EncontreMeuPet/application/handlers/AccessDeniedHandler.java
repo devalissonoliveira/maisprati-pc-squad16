@@ -24,7 +24,6 @@ public class AccessDeniedHandler implements org.springframework.security.web.acc
         });
         System.out.println(j);
         response.getWriter().write(j);
-        System.out.println("Caiu aqui no Deniador");
         accessDeniedException.printStackTrace();
     }
 }

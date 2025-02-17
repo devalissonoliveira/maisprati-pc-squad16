@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import Login from "./pages/login";
-import Register from "./pages/petRegistration";
-import CadastroClient from "./pages/cadastroClient";
+import RoutesOfPage from "./router/router";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -128,9 +126,7 @@ function App() {
           {/* section menu escondido */}
         </div>
       </section>
-      <Login />
-      {/* <Register/> */}
-      {/* <CadastroClient/> */}
+      <RoutesOfPage/>
     </>
   );
 }

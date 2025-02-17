@@ -46,7 +46,7 @@ function App() {
             </ul>
           </nav>
 
-          <div className="md:hidden">
+          <div className="sm:hidden">
             <button onClick={toggleMenu}>
               {/* Exibe o ícone de hambúrguer ou "X" dependendo do estado */}
               <svg
@@ -68,9 +68,10 @@ function App() {
           {/* section menu escondido */}
           {isMenuOpen && (
             <aside
-              className={`fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out ${
+              className={`fixed inset-0 z-50 transform transition-all duration-300 ease-in-out 
+              ${
                 isMenuOpen ? "translate-x-0" : "-translate-x-full"
-              } md:hidden`}
+              } md:hidden backdrop-blur-sm`}
             >
               <div className="absolute top-5 left-5">
                 <button
@@ -95,12 +96,12 @@ function App() {
                 </button>
               </div>
               <ul className="flex flex-col space-x-10 space-y-5 pt-6 pb-20 px-6 bg-slate-400">
-                <li className="m-0">
+                <li className="ml-10">
                   <a href="#home" className="hover:text-blue-700 text-center">
                     Home
                   </a>
                 </li>
-                <li className="m-0">
+                <li>
                   <a
                     href="#como-funciona"
                     className="hover:text-blue-700 text-center"
@@ -108,12 +109,12 @@ function App() {
                     Como funciona
                   </a>
                 </li>
-                <li className="m-0 bg-red-500">
+                <li>
                   <a href="#plano" className="hover:text-blue-700 text-center">
                     Plano
                   </a>
                 </li>
-                <li className="m-0">
+                <li>
                   <a
                     href="#contato"
                     className="hover:text-blue-700 text-center"

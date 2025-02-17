@@ -11,9 +11,7 @@ function Register() {
   function handleAddfile(event) {
     const selectedFile = event.target.value;
     setFile(selectedFile);
-    console.error("antes de atualizar:" + file + " e o passado: " + selectedFile);
     document.getElementById("file-name").textContent = selectedFile;
-    console.error("depois de atualizar:" + file);
   }
   return (
     <>
@@ -207,70 +205,24 @@ function Register() {
               </div>
             )}
 
-            <div className="sm:col-span-3">
-              <label
-                for="first-name"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                <span className="capitalize">primeiro</span> telefone
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="first-name"
-                  id="first-name"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-3">
-              <label
-                for="last-name"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                <span className="capitalize">segundo</span> telefone
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
             <div className="col-span-full">
               <label
-                for="street-address"
-                className="block text-sm/6 font-medium text-gray-900 capitalize"
+                for="observation"
+                className="text-start block text-sm/6 font-medium text-gray-900 capitalize"
               >
-                senha
+                observações
               </label>
+              <p className="text-start text-gray-400 text-xs">
+                <span className="capitalize">máximo</span> de 512 palavras.
+              </p>
               <div className="mt-2">
-                <input
+                <textarea
+                  rows="7"
                   type="text"
-                  name="street-address"
-                  id="street-address"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-full ">
-              <label
-                for="city"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                <span>confirmação</span> da senha
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="city"
-                  id="confirPassword"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  maxLength="512"
+                  id="observations"
+                  placeholder="Digite suas observações aqui..."
+                  className="resize-none block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
             </div>

@@ -25,40 +25,6 @@ function Register() {
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            {/* <div className="sm:col-span-3">
-              <label
-                for="first-name"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                First name
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="first-name"
-                  id="first-name"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-3">
-              <label
-                for="last-name"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Last name
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div> */}
-
             <div className="sm:col-span-full">
               <label
                 for="name"
@@ -156,7 +122,6 @@ function Register() {
                     name="yes"
                     id="yes"
                     placeholder="Shih tzu, Pastor Alemão..."
-                    required
                     checked={selected === "yes"}
                     onChange={() => handleCheckboxChange("yes")}
                     // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -174,7 +139,6 @@ function Register() {
                     name="no"
                     id="no"
                     placeholder="Shih tzu, Pastor Alemão..."
-                    required
                     checked={selected === "no"}
                     onChange={() => handleCheckboxChange("no")}
                     // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"

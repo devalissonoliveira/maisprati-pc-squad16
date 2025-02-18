@@ -15,8 +15,8 @@ function Register() {
   }
   return (
     <>
-      <form method="post" className="bg-white">
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <form method="post" className="flex items-center justify-center max-w-full">
+        <div className="flex max-h-full w-[50%] bg-yellow-200 flex-col justify-center px-6 py-12 lg:px-8">
           <h2 className="text-base/7 font-semibold text-gray-900">
             Register your Pet
           </h2>
@@ -191,21 +191,20 @@ function Register() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="mt-6 flex items-center justify-end gap-x-6 col-span-full">
-          <button
-            type="button"
-            className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Salvar
-          </button>
+          <div className="mt-6 flex items-center justify-end gap-x-6 col-span-full">
+            <button
+              type="button"
+              className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Salvar
+            </button>
+          </div>
         </div>
       </form>
     </>

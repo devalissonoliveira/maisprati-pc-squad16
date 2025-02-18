@@ -7,10 +7,10 @@ function cadastroClient() {
   const [Email, setEmail] = useState("");
   const [EmailError, setEmailError] = useState("");
 
-  function confirmedEmail(){
+  function confirmedEmail() {
     const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-    if(!regex.test(Email)){
-        setEmailError("Campo de email incorredo ou incompleto!")
+    if (!regex.test(Email)) {
+      setEmailError("Campo de email incorredo ou incompleto!");
     }
   }
 
@@ -31,8 +31,8 @@ function cadastroClient() {
 
   return (
     <>
-      <form method="post" onSubmit={handleSubmit}>
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <form method="post" onSubmit={handleSubmit} className="flex items-center justify-center">
+        <div className="flex min-h-full w-[50%] bg-green-200 flex-col justify-center px-6 py-12 lg:px-8 ">
           <h2 className="text-base/7 font-semibold text-gray-900">
             Personal Information
           </h2>
@@ -53,6 +53,7 @@ function cadastroClient() {
                   type="text"
                   name="first-name"
                   id="first-name"
+                  placeholder="First name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -70,6 +71,7 @@ function cadastroClient() {
                   type="text"
                   name="last-name"
                   id="last-name"
+                  placeholder="Last name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -87,7 +89,8 @@ function cadastroClient() {
                   id="email"
                   name="email"
                   type="email"
-                  onChange={(e)=> setEmail(e.target.value)}
+                  placeholder="Your Email is here."
+                  onChange={(e) => setEmail(e.target.value)}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -110,13 +113,14 @@ function cadastroClient() {
                 for="email"
                 className="block text-sm/6 font-medium text-gray-900 capitalize sm:text-start text-center "
               >
-                endereço
+                Address
               </label>
               <div className="mt-2">
                 <input
                   id="email"
                   name="email"
                   type="text"
+                  placeholder="Address"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -133,6 +137,7 @@ function cadastroClient() {
                   id="email"
                   name="email"
                   type="text"
+                  placeholder="Number your Address"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -151,6 +156,7 @@ function cadastroClient() {
                   id="email"
                   name="email"
                   type="email"
+                  placeholder="Bairro"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -167,6 +173,7 @@ function cadastroClient() {
                   id="email"
                   name="email"
                   type="text"
+                  placeholder="Cep of your home"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -184,6 +191,7 @@ function cadastroClient() {
                   id="email"
                   name="email"
                   type="email"
+                  placeholder="Cit"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -200,6 +208,7 @@ function cadastroClient() {
                   id="email"
                   name="email"
                   type="text"
+                  placeholder="Estate"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -217,6 +226,7 @@ function cadastroClient() {
                   type="text"
                   name="first-name"
                   id="first-name"
+                  placeholder="Primeiro numero"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -234,6 +244,7 @@ function cadastroClient() {
                   type="text"
                   name="last-name"
                   id="last-name"
+                  placeholder="Segundo numero "
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -248,12 +259,13 @@ function cadastroClient() {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="password"
                   name="street-address"
                   id="street-address"
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
+                  placeholder="password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -268,13 +280,14 @@ function cadastroClient() {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="password"
                   name="city"
                   id="confirPassword"
                   onChange={(e) => {
                     setConfirmPassword(e.target.value);
                     handleChangerPassword;
                   }}
+                  placeholder="Confirme password"
                   className={`block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6`}
                 />
               </div>
@@ -290,21 +303,20 @@ function cadastroClient() {
               </div>
             )}
           </div>
-        </div>
-
-        <div className="mt-6 flex items-center justify-end gap-x-6">
-          <button
-            type="button"
-            className="text-sm/6 font-semibold text-gray-900"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Salvar
-          </button>
+          <div className="flex items-center justify-end gap-x-6 mt-8">
+            <button
+              type="button"
+              className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Salvar
+            </button>
+          </div>
         </div>
       </form>
     </>

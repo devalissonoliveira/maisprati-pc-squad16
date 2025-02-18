@@ -9,7 +9,6 @@ import PetRegistration from "../pages/petRegistration";
 const RoutesOfPage = () => {
    return(
             <Routes>
-                {/* <NavBar/> */}
                 <Route Component = { Login }  path="/" exact />
                 <Route Component = { CadastroClient }  path="/CadastroClient" />
                 <Route Component = { PetRegistration }  path="/PetRegistration" />

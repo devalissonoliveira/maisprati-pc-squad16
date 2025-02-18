@@ -7,8 +7,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavBar />
-        <RoutesOfPage />
+        <article className="w-screen min-h-screen box-border overflow-x-hidden">
+          <NavBar />
+          <RoutesOfPage />
+        </article>
       </BrowserRouter>
     </>
   );

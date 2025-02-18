@@ -1,12 +1,20 @@
 package com.br.maisprati.squad16.EncontreMeuPet.application.controllers;
 
+import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CreateUserRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.LoginRequest;
-import com.br.maisprati.squad16.EncontreMeuPet.application.requests.RegisterRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.services.TokenService;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Address;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.City;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.State;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.AddressRepository;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.CityRepository;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.StateRepository;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,16 +30,24 @@ public class AuthorizationController {
 
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
-    private final PasswordEncoder encoder;
     private final TokenService tokenService;
+    private final PasswordEncoder passwordEncoder;
+    private final AddressRepository addressRepository;
+    private final StateRepository stateRepository;
+    private final CityRepository cityRepository;
 
-    public AuthorizationController(
-                                    UserRepository userRepository, AuthenticationManager authenticationManager,
-                                   PasswordEncoder encoder, TokenService tokenService) {
-        this.encoder = encoder;
+    public AuthorizationController(UserRepository userRepository,
+            AuthenticationManager authenticationManager,
+            TokenService tokenService, PasswordEncoder passwordEncoder,
+            StateRepository stateRepository, CityRepository cityRepository,
+            AddressRepository addressRepository) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
+        this.passwordEncoder = passwordEncoder;
+        this.stateRepository = stateRepository;
+        this.cityRepository = cityRepository;
+        this.addressRepository = addressRepository;
     }
 
     @PostMapping("/login")
@@ -52,18 +68,55 @@ public class AuthorizationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest req) {
-        if (this.userRepository.findByEmail(req.email()).isPresent())
-            return ResponseEntity.unprocessableEntity().body("{\"error\":\"Email já está sendo usado\"}");
-        var user = new User();
-        user.setEmail(req.email());
-        user.setName(req.name());
-        user.setPassword(this.encoder.encode(req.password()));
+    @Transactional
+    public ResponseEntity<?> createUser(@RequestBody @Valid CreateUserRequest request) {
+        if (this.userRepository.findByEmail(request.email()).isPresent()) {
+            return ResponseEntity.unprocessableEntity()
+                    .body(new Object() {
+                        public String message = "Email já está sendo usado";
+                    });
+        }
+
+        State state = stateRepository.findByStateCode(request.state())
+                .orElseGet(() -> {
+                    State newState = new State();
+                    newState.setStateCode(request.state());
+                    newState.setName(request.state());
+                    return stateRepository.save(newState);
+                });
+
+        City city = cityRepository.findByNameAndState(request.city(), state)
+                .orElseGet(() -> {
+                    City newCity = new City();
+                    newCity.setState(state);
+                    newCity.setName(request.city());
+                    return cityRepository.save(newCity);
+                });
+
+        Address address = new Address();
+        address.setCity(city);
+        address.setStreet(request.street());
+        address.setNumber(request.number());
+        address.setNeighborhood(request.neighborhood());
+        address.setPostalCode(request.postalCode());
+        address = addressRepository.save(address);
+
+        User user = new User();
+        user.setName(request.name());
+        user.setEmail(request.email());
+        user.setPassword(this.passwordEncoder.encode(request.password()));
+        user.setPhone(request.phone());
+        user.setAddress(address);
         user.setRole(Roles.USER);
-        var data = this.userRepository.save(user);
+        user.setActive(true);
+        user.setRegistrationDate(LocalDateTime.now());
+
+        User savedUser = this.userRepository.save(user);
+
         return ResponseEntity.ok(new Object() {
-            public Long id = data.getUserId();
-            public String email = data.getUsername();
+            public Long id = savedUser.getUserId();
+            public String name = savedUser.getName();
+            public String email = savedUser.getEmail();
         });
     }
 }

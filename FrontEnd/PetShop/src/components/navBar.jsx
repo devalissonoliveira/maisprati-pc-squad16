@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // import { Container } from './styles';
 
@@ -23,24 +24,24 @@ function NavBar() {
             {/* Links do lado esquerdo */}
             <ul className="flex text-end space-x-6">
               <li>
-                <a href="#home" className="hover:text-blue-700">
+                <Link to="/" className="hover:text-blue-700">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#como-funciona" className="hover:text-blue-700">
+                <Link to="/PetRegistration" className="hover:text-blue-700">
                   Como funciona
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#plano" className="hover:text-blue-700">
+                <Link to="/CadastroClient" className="hover:text-blue-700">
                   Plano
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contato" className="hover:text-blue-700">
+                <Link to="#contato" className="hover:text-blue-700">
                   Contato
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -96,30 +97,33 @@ function NavBar() {
               </div>
               <ul className="flex flex-col space-x-10 space-y-5 pt-6 pb-20 px-6 bg-slate-400">
                 <li className="ml-10">
-                  <a href="#home" className="hover:text-blue-700 text-center">
+                  <a href="/" className="hover:text-blue-700 text-center">
                     Home
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#como-funciona"
+                  <Link
+                    to="/PetRegistration"
                     className="hover:text-blue-700 text-center"
                   >
                     Como funciona
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#plano" className="hover:text-blue-700 text-center">
+                  <Link
+                    to="/CadastroClient"
+                    className="hover:text-blue-700 text-center"
+                  >
                     Plano
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#contato"
+                  <Link
+                    to="#contato"
                     className="hover:text-blue-700 text-center"
                   >
                     Contato
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </aside>

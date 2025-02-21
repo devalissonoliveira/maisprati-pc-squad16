@@ -40,12 +40,6 @@ public class Pet {
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "has_pedigree")
-    private boolean hasPedigree;
-
-    @Column(name = "pedigree_file", length = 255)
-    private String pedigreeFile;
-
     @Column(name = "observations", columnDefinition = "TEXT")
     private String observations;
 
@@ -106,22 +100,6 @@ public class Pet {
         this.age = age;
     }
 
-    public boolean isHasPedigree() {
-        return hasPedigree;
-    }
-
-    public void setHasPedigree(boolean hasPedigree) {
-        this.hasPedigree = hasPedigree;
-    }
-
-    public String getPedigreeFile() {
-        return pedigreeFile;
-    }
-
-    public void setPedigreeFile(String pedigreeFile) {
-        this.pedigreeFile = pedigreeFile;
-    }
-
     public String getObservations() {
         return observations;
     }
@@ -174,7 +152,6 @@ public class Pet {
                 + ", species=" + species
                 + ", breed='" + breed + '\''
                 + ", age=" + age
-                + ", hasPedigree=" + hasPedigree
                 + ", registrationDate=" + registrationDate
                 + ", active=" + active
                 + '}';

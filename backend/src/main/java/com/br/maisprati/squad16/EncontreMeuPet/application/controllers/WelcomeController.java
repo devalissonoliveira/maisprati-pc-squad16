@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WelcomeController {
+
     @GetMapping("/welcome")
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<?> greeting()
-    {
-        return ResponseEntity.ok(new Object(){
+    public ResponseEntity<?> greeting() {
+        return ResponseEntity.ok(new Object() {
             public final String message = "Welcome";
         });
     }

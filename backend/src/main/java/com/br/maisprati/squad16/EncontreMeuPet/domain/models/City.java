@@ -13,19 +13,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "cities")
 public class City {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private Long cityId;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id", nullable = false)
     private State state;
-    
+
     @Column(name = "name", length = 100, nullable = false)
     private String name;
-
 
     public City() {
     }
@@ -61,8 +60,12 @@ public class City {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         City city = (City) o;
 
@@ -76,10 +79,10 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "cityId=" + cityId +
-                ", state=" + state.getStateCode() +
-                ", name='" + name + '\'' +
-                '}';
+        return "City{"
+                + "cityId=" + cityId
+                + ", state=" + state.getStateCode()
+                + ", name='" + name + '\''
+                + '}';
     }
 }

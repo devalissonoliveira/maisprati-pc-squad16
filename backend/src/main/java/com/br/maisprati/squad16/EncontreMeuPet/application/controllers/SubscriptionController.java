@@ -4,7 +4,6 @@ import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CancelSubscr
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CreateSubscriptionRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.ApplicationException;
-import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionAlreadyExistsException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionDateInvalidException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.services.SubscriptionService;
@@ -16,13 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/subscriptions")
 @SecurityRequirement(name = "Bearer Authentication")
 public class SubscriptionController {
+
     private final SubscriptionService subscriptionService;
 
     public SubscriptionController(SubscriptionService subscriptionService) {

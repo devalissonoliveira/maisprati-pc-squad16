@@ -13,111 +13,115 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "addresses")
 public class Address {
-   
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "address_id")
-   private Long addressId;
-   
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "city_id", nullable = false)
-   private City city;
-   
-   @Column(name = "neighborhood", length = 100, nullable = false)
-   private String neighborhood;
-   
-   @Column(name = "street", length = 200, nullable = false)
-   private String street;
-   
-   @Column(name = "number", length = 20, nullable = false)
-   private String number;
-   
-   @Column(name = "postal_code", length = 8, nullable = false)
-   private String postalCode;
 
-   public Address() {
-   }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
+    private Long addressId;
 
-   public Address(City city, String neighborhood, String street, String number, String postalCode) {
-       this.city = city;
-       this.neighborhood = neighborhood;
-       this.street = street;
-       this.number = number;
-       this.postalCode = postalCode;
-   }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
 
-   public Long getAddressId() {
-       return addressId;
-   }
+    @Column(name = "neighborhood", length = 100, nullable = false)
+    private String neighborhood;
 
-   public void setAddressId(Long addressId) {
-       this.addressId = addressId;
-   }
+    @Column(name = "street", length = 200, nullable = false)
+    private String street;
 
-   public City getCity() {
-       return city;
-   }
+    @Column(name = "number", length = 20, nullable = false)
+    private String number;
 
-   public void setCity(City city) {
-       this.city = city;
-   }
+    @Column(name = "postal_code", length = 8, nullable = false)
+    private String postalCode;
 
-   public String getNeighborhood() {
-       return neighborhood;
-   }
+    public Address() {
+    }
 
-   public void setNeighborhood(String neighborhood) {
-       this.neighborhood = neighborhood;
-   }
+    public Address(City city, String neighborhood, String street, String number, String postalCode) {
+        this.city = city;
+        this.neighborhood = neighborhood;
+        this.street = street;
+        this.number = number;
+        this.postalCode = postalCode;
+    }
 
-   public String getStreet() {
-       return street;
-   }
+    public Long getAddressId() {
+        return addressId;
+    }
 
-   public void setStreet(String street) {
-       this.street = street;
-   }
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
 
-   public String getNumber() {
-       return number;
-   }
+    public City getCity() {
+        return city;
+    }
 
-   public void setNumber(String number) {
-       this.number = number;
-   }
+    public void setCity(City city) {
+        this.city = city;
+    }
 
-   public String getPostalCode() {
-       return postalCode;
-   }
+    public String getNeighborhood() {
+        return neighborhood;
+    }
 
-   public void setPostalCode(String postalCode) {
-       this.postalCode = postalCode;
-   }
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
 
-   @Override
-   public boolean equals(Object o) {
-       if (this == o) return true;
-       if (o == null || getClass() != o.getClass()) return false;
+    public String getStreet() {
+        return street;
+    }
 
-       Address address = (Address) o;
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-       return addressId != null ? addressId.equals(address.addressId) : address.addressId == null;
-   }
+    public String getNumber() {
+        return number;
+    }
 
-   @Override
-   public int hashCode() {
-       return addressId != null ? addressId.hashCode() : 0;
-   }
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-   @Override
-   public String toString() {
-       return "Address{" +
-               "addressId=" + addressId +
-               ", city=" + city.getName() +
-               ", neighborhood='" + neighborhood + '\'' +
-               ", street='" + street + '\'' +
-               ", number='" + number + '\'' +
-               ", postalCode='" + postalCode + '\'' +
-               '}';
-   }
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Address address = (Address) o;
+
+        return addressId != null ? addressId.equals(address.addressId) : address.addressId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return addressId != null ? addressId.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{"
+                + "addressId=" + addressId
+                + ", city=" + city.getName()
+                + ", neighborhood='" + neighborhood + '\''
+                + ", street='" + street + '\''
+                + ", number='" + number + '\''
+                + ", postalCode='" + postalCode + '\''
+                + '}';
+    }
 }

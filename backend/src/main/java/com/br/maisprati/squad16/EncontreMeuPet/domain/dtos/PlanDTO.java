@@ -1,7 +1,6 @@
 package com.br.maisprati.squad16.EncontreMeuPet.domain.dtos;
 
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Plan;
-
 import java.math.BigDecimal;
 
 public record PlanDTO(
@@ -12,13 +11,13 @@ public record PlanDTO(
         BigDecimal annualPrice,
         Integer minPets,
         Integer maxPets,
-        Boolean active
-) {
+        Boolean active) {
+
     public Plan toModel() {
         return PlanDTO.toFromDTOToModel(this);
     }
-    public static Plan toFromDTOToModel(PlanDTO planDTO)
-    {
+
+    public static Plan toFromDTOToModel(PlanDTO planDTO) {
         var plan = new Plan();
         plan.setName(planDTO.name);
         plan.setDescription(planDTO.description);
@@ -29,6 +28,7 @@ public record PlanDTO(
         plan.setActive(planDTO.active);
         return plan;
     }
+
     public static PlanDTO fromPlanModel(Plan plan) {
         return new PlanDTO(
                 plan.getPlanId(),

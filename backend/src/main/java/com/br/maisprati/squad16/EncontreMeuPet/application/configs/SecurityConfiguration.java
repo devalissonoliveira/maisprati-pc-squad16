@@ -1,6 +1,5 @@
 package com.br.maisprati.squad16.EncontreMeuPet.application.configs;
 
-
 import com.br.maisprati.squad16.EncontreMeuPet.application.handlers.AccessDeniedHandler;
 import com.br.maisprati.squad16.EncontreMeuPet.application.handlers.JWTAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,6 +21,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
     private final SecurityFilter securityFilter;
     private final AccessDeniedHandler jwtAccessDeniedHandler;
     private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -32,20 +31,20 @@ public class SecurityConfiguration {
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(c -> c.disable())
-                .authorizeHttpRequests((authorize) ->
-                        authorize
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**")).permitAll()
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/**")).permitAll()
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/error/**")).permitAll()
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui.html")).permitAll()
-                                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/login")).permitAll()
-                                .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/register")).permitAll()
-                                .anyRequest().authenticated()
-
+                .authorizeHttpRequests((authorize)
+                        -> authorize
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/v3/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/error/**")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/swagger-ui.html")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/login")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/register")).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .headers(h -> h.frameOptions(f -> f.disable()))
                 .cors(e -> e.disable())

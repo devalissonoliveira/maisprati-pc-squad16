@@ -4,7 +4,6 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.PlanDTO;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
 
 public record UpdatePlanRequest(
@@ -24,13 +23,13 @@ public record UpdatePlanRequest(
         @Min(0)
         Integer maxPets,
         @NotNull
-        Boolean active
-) {
+        Boolean active) {
+
     public PlanDTO toDTO() {
         return UpdatePlanRequest.fromRequest(this);
     }
-    public static PlanDTO fromRequest(UpdatePlanRequest request)
-    {
+
+    public static PlanDTO fromRequest(UpdatePlanRequest request) {
         return new PlanDTO(
                 null,
                 request.name(),

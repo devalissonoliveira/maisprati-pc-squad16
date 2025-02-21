@@ -5,13 +5,9 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.SubscriptionStatus;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Plan;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Subscription;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public record SubscriptionDTO(
         Long subscriptionId,
@@ -23,8 +19,8 @@ public record SubscriptionDTO(
         BigDecimal amountPaid,
         SubscriptionStatus status,
         LocalDate cancellationDate,
-        String cancellationReason
-) {
+        String cancellationReason) {
+
     public static SubscriptionDTO fromModel(Subscription subscription) {
         return new SubscriptionDTO(
                 subscription.getSubscriptionId(),
@@ -39,6 +35,7 @@ public record SubscriptionDTO(
                 subscription.getCancellationReason()
         );
     }
+
     public static Subscription toModel(SubscriptionDTO subscription) {
         var sub = new Subscription();
         sub.setAmountPaid(subscription.amountPaid());
@@ -50,6 +47,7 @@ public record SubscriptionDTO(
         sub.setCancellationReason(subscription.cancellationReason());
         return sub;
     }
+
     public static Subscription toModel(SubscriptionDTO subscription, Function< Long, User> userFunction, Function<Long, Plan> planFunction) {
         Subscription sub = toModel(subscription);
         var user = userFunction.apply(subscription.userId);
@@ -58,15 +56,16 @@ public record SubscriptionDTO(
         sub.setPlan(plan);
         return sub;
     }
+
     public static Subscription toModel(SubscriptionDTO subscription, User user, Plan plan) {
         Subscription sub = toModel(subscription);
         sub.setUser(user);
         sub.setPlan(plan);
         return sub;
     }
-    public boolean isValidRangeDate()
-    {
+
+    public boolean isValidRangeDate() {
         var model = SubscriptionDTO.toModel(this);
-        return  model.getStartDate().isBefore(model.getEndDate());
+        return model.getStartDate().isBefore(model.getEndDate());
     }
 }

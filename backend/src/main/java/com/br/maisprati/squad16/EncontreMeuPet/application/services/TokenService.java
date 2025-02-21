@@ -7,43 +7,45 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 @Service
 public class TokenService {
-    @Value("{api.security.token.secret}")
-    private  String JWT_SECRET;
 
-    public String generateToken(User user){
-        try{
+    @Value("{api.security.token.secret}")
+    private String JWT_SECRET;
+
+    public String generateToken(User user) {
+        try {
 
             Algorithm algorithm = Algorithm.HMAC256(JWT_SECRET);;
             String token = JWT.create().withIssuer("auth-api")
                     .withSubject(user.getEmail())
                     .withExpiresAt(this.expirationTime())
                     .sign(algorithm);
-            return  token;
-        }catch (JWTCreationException e){
+            return token;
+        } catch (JWTCreationException e) {
             throw new RuntimeException("Error generate token");
         }
 
     }
-    public String verifyToken(String token){
-        try{
+
+    public String verifyToken(String token) {
+        try {
             return JWT.require(Algorithm.HMAC256(JWT_SECRET))
                     .withIssuer("auth-api")
                     .build()
                     .verify(token)
                     .getSubject();
 
-        }catch (JWTVerificationException e){
+        } catch (JWTVerificationException e) {
             return null;
         }
     }
-    private Instant expirationTime(){
+
+    private Instant expirationTime() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }

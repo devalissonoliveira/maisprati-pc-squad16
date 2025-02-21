@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserSeeder implements CommandLineRunner {
+
     @Value("${spring.security.user.email}")
     private String adminEmail;
     @Value("${spring.security.user.password}")
@@ -17,17 +18,23 @@ public class UserSeeder implements CommandLineRunner {
 
     private final PasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
+
     public UserSeeder(PasswordEncoder bCryptPasswordEncoder, UserRepository userRepository) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userRepository = userRepository;
     }
 
-
     @Override
     public void run(String... args) throws Exception {
-        if(this.adminEmail == null) return;
-        if(this.adminPassword == null) return;
-        if(this.userRepository.count() > 0) return;
+        if (this.adminEmail == null) {
+            return;
+        }
+        if (this.adminPassword == null) {
+            return;
+        }
+        if (this.userRepository.count() > 0) {
+            return;
+        }
         var user = new User();
         user.setPhone("00000000");
         user.setEmail(this.adminEmail);

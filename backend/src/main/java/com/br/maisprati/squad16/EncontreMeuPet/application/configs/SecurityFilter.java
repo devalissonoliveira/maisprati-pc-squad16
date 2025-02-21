@@ -8,18 +8,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-
-
 import java.io.IOException;
 
 @Service
 public class SecurityFilter extends OncePerRequestFilter {
-
 
     private final TokenService tokenService;
     private final AuthorizationService userRepository;
@@ -36,18 +31,21 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (token != null) {
             System.out.println("Caiu aqui");
             var subject = this.tokenService.verifyToken(token);
-            try{
+            try {
                 var user = this.userRepository.loadUserByUsername(subject);
                 SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities()));
-            }catch (UsernameNotFoundException e){
+            } catch (UsernameNotFoundException e) {
                 SecurityContextHolder.getContext().setAuthentication(null);
             }
         }
         filterChain.doFilter(request, response);
     }
+
     private String recoverToken(HttpServletRequest request) {
         var header = request.getHeader("Authorization");
-        if (header == null) return null;
+        if (header == null) {
+            return null;
+        }
         return header.replace("Bearer ", "");
     }
 }

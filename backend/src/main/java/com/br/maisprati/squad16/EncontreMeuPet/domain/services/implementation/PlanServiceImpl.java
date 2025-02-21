@@ -1,13 +1,11 @@
 package com.br.maisprati.squad16.EncontreMeuPet.domain.services.implementation;
 
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.PlanDTO;
-import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Plan;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.PlanRepository;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.services.PlanService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,6 +13,7 @@ import java.util.stream.Collectors;
 @Transactional
 @Service
 public class PlanServiceImpl implements PlanService {
+
     private final PlanRepository planRepository;
 
     public PlanServiceImpl(
@@ -38,7 +37,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<PlanDTO> all() {
-        return  this.planRepository.findAll().stream().map(PlanDTO::fromPlanModel).collect(Collectors.toList());
+        return this.planRepository.findAll().stream().map(PlanDTO::fromPlanModel).collect(Collectors.toList());
     }
 
     @Override

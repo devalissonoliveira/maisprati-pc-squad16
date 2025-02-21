@@ -4,6 +4,6 @@ public enum Roles {
     USER("USER"),
     ADMIN("ADMIN");
 
-    Roles(String role){}
+    Roles(String role) {
+    }
 }
-

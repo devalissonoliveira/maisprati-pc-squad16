@@ -6,23 +6,20 @@ import com.br.maisprati.squad16.EncontreMeuPet.application.requests.UpdatePlanRe
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.PlanDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.services.PlanService;
 import io.swagger.v3.oas.annotations.Operation;
-
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/plans")
 @SecurityRequirement(name = "Bearer Authentication")
 public class PlanController {
+
     private final PlanService planService;
 
     public PlanController(
@@ -76,13 +73,11 @@ public class PlanController {
         if (e.equals(ActiveQuery.BOTH)) {
             return ResponseEntity.ok(
                     this.planService.all()
-
             );
         }
 
         return ResponseEntity.ok(
                 this.planService.allActive(e.equals(ActiveQuery.ACTIVE))
-
         );
     }
 
@@ -95,7 +90,7 @@ public class PlanController {
         return plan
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound()
-                        .build());
+                .build());
     }
 
     @DeleteMapping("/{id}")

@@ -24,6 +24,7 @@ public class PetServiceImpl implements PetService {
     public PetDTO create(PetDTO petDto) {
         var pet = petDto.toModel();
         pet.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        pet.setActive(true);
         return PetDTO.fromModelToDTO(this.petRepository.save(pet));
     }
 

@@ -39,7 +39,7 @@ public record CreatePetRequest(
         return new PetDTO(
                 null,
                 request.name,
-                PetSpecies.valueOf(request.species),
+                PetSpecies.valueOf(PetSpecies.class, request.species),
                 request.breed,
                 request.age,
                 request.hasPedigree,

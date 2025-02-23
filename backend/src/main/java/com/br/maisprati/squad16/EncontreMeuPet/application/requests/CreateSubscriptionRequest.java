@@ -35,7 +35,7 @@ public record CreateSubscriptionRequest(
                         createSubscriptionRequest.planId,
                         LocalDate.parse(createSubscriptionRequest.startDate),
                         LocalDate.parse(createSubscriptionRequest.endDate),
-                        PeriodType.valueOf(createSubscriptionRequest.periodType),
+                        PeriodType.valueOf(PeriodType.class, createSubscriptionRequest.periodType),
                         createSubscriptionRequest.amountPaid,
                         null,
                         null,

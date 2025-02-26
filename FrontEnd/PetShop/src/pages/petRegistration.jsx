@@ -16,7 +16,7 @@ function Register() {
   return (
     <>
       <form method="post" className="flex items-center justify-center max-w-full">
-        <div className="flex max-h-full w-[50%] bg-yellow-200 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex max-h-full w-[50%] flex-col justify-center px-6 py-12 lg:px-8">
           <h2 className="text-base/7 font-semibold text-gray-900">
             Register your Pet
           </h2>

@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <article className="w-screen min-h-screen box-border overflow-x-hidden">
+        <article className="w-screen min-h-screen box-border">
           <NavBar />
           <RoutesOfPage />
         </article>

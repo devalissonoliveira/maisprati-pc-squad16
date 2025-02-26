@@ -32,7 +32,7 @@ function cadastroClient() {
   return (
     <>
       <form method="post" onSubmit={handleSubmit} className="flex items-center justify-center">
-        <div className="flex min-h-full w-[50%] bg-green-200 flex-col justify-center px-6 py-12 lg:px-8 ">
+        <div className="flex min-h-full w-[50%] flex-col justify-center px-6 py-12 lg:px-8 ">
           <h2 className="text-base/7 font-semibold text-gray-900">
             Personal Information
           </h2>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link, Links } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { FaRegBell } from "react-icons/fa";
 
 // import {
@@ -163,7 +163,7 @@ function NavBar() {
           )}
         </div>
       </section> */}
-      <div className="min-h-full">
+      <article className="min-h-full">
         <nav className="bg-gray-800">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
@@ -312,7 +312,7 @@ function NavBar() {
             </div>
           </div>
         </nav>
-      </div>
+      </article>
     </>
   );
 }

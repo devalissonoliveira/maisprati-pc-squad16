@@ -1,4 +1,5 @@
 // import { Container } from './styles';
+import { Link } from "react-router-dom";
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -53,7 +54,7 @@ function Login() {
             </div>
 
             <article className="sm:col-span-full mt-0 text-blue-400 font-normal text-end">
-              <a href="#">esqueceu sua senha?</a>
+              <Link to="/RecoverPassword">esqueceu sua senha?</Link>
             </article>
 
             <div className="mt-6 flex items-center justify-end gap-x-6 sm:col-span-full">

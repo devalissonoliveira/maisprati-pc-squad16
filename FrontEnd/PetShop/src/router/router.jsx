@@ -4,12 +4,14 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Login from "../pages/login";
 import CadastroClient from "../pages/cadastroClient";
 import PetRegistration from "../pages/petRegistration";
-// import NavBar from "../components/navBar";
+import RecoverPassword from "../pages/recoverPassword";
+import Home from "../pages/home";
 
 const RoutesOfPage = () => {
    return(
             <Routes>
-                <Route Component = { Login }  path="/" exact />
+                <Route Component = { Home }  path="/" exact />
+                <Route Component = { RecoverPassword }  path="/RecoverPassword" exact />
                 <Route Component = { CadastroClient }  path="/CadastroClient" />
                 <Route Component = { PetRegistration }  path="/PetRegistration" />
             </Routes>

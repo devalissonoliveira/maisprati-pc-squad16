@@ -17,7 +17,7 @@ const Home = () => {
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 class="text-2xl font-bold tracking-tight text-gray-900"><span className="capitalize">por</span> que usar o <span className="capitalize">encontre meu pet?</span></h2>
           {/* RESOLVER A QUESTAO DO ALINHAMENTO AQUI*/}
-          <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <div class="mt-6 grid grid-cols-1 items-center gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             <div class="bg-gray-300 rounded-xl h-60 flex flex-col items-center justify-center">
               <FaHandshake className="size-[25%]"/>
               <div class="mt-4 text-center">

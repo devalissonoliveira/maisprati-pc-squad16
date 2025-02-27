@@ -90,7 +90,7 @@ public class PetController {
     )
     public ResponseEntity<?> deleteById(
             @PathVariable Long id
-    ) {
+    ) throws ApplicationException {
         this.petService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

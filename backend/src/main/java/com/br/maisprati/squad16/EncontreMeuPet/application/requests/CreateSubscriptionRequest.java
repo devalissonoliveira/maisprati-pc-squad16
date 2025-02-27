@@ -39,6 +39,7 @@ public record CreateSubscriptionRequest(
                         createSubscriptionRequest.amountPaid,
                         null,
                         null,
+                        null,
                         null
                 );
         }

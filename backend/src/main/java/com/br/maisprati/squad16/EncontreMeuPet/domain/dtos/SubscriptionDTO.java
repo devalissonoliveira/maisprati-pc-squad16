@@ -8,6 +8,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.Function;
 
 public record SubscriptionDTO(
@@ -20,7 +21,8 @@ public record SubscriptionDTO(
         BigDecimal amountPaid,
         SubscriptionStatus status,
         LocalDate cancellationDate,
-        String cancellationReason
+        String cancellationReason,
+        List<SubscriptionPetDTO> pets
 ) {
     public static SubscriptionDTO toDTO(Subscription subscription) {
         return new SubscriptionDTO(
@@ -33,7 +35,23 @@ public record SubscriptionDTO(
                 subscription.getAmountPaid(),
                 subscription.getStatus(),
                 subscription.getCancellationDate(),
-                subscription.getCancellationReason()
+                subscription.getCancellationReason(),
+                null
+        );
+    }
+    public static SubscriptionDTO toDTO(Subscription subscription, List<SubscriptionPetDTO> pets) {
+        return new SubscriptionDTO(
+                subscription.getSubscriptionId(),
+                subscription.getUser().getUserId(),
+                subscription.getPlan().getPlanId(),
+                subscription.getStartDate(),
+                subscription.getEndDate(),
+                subscription.getPeriodType(),
+                subscription.getAmountPaid(),
+                subscription.getStatus(),
+                subscription.getCancellationDate(),
+                subscription.getCancellationReason(),
+                pets
         );
     }
     public Subscription toModel() {

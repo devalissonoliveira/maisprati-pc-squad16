@@ -3,6 +3,7 @@ package com.br.maisprati.squad16.EncontreMeuPet.application.controllers;
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.AddPetToSubscriptionRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CancelSubscriptionRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CreateSubscriptionRequest;
+import com.br.maisprati.squad16.EncontreMeuPet.application.requests.RemovePetFromSubscriptionRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionPetDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.ApplicationException;
@@ -10,6 +11,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionAlr
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionDateInvalidException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.SubscriptionPet;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.services.PetService;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.services.SubscriptionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -29,9 +31,11 @@ import java.util.List;
 @SecurityRequirement(name = "Bearer Authentication")
 public class SubscriptionController {
     private final SubscriptionService subscriptionService;
+    private final PetService petService;
 
-    public SubscriptionController(SubscriptionService subscriptionService) {
+    public SubscriptionController(SubscriptionService subscriptionService, PetService petService) {
         this.subscriptionService = subscriptionService;
+        this.petService = petService;
     }
 
     @PostMapping
@@ -65,6 +69,27 @@ public class SubscriptionController {
                 addPetToSubscriptionRequest.petIds(),
                 (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
         ));
+    }
+
+    @PatchMapping("/{id}/remove")
+    @Operation(
+            description = "Remove pet to a existing subscription"
+    )
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> removePet(
+            @PathVariable Long id,
+            @RequestBody @Valid RemovePetFromSubscriptionRequest addPetToSubscriptionRequest
+    ) throws ApplicationException {
+        var subscription = this.subscriptionService.findById(id)
+                .orElseThrow(() -> new ApplicationException("Plano não encontrado", HttpStatus.NOT_FOUND));
+        var pet = this.petService.findById(addPetToSubscriptionRequest.petId())
+                .orElseThrow(() -> new ApplicationException("Animal não encontrado", HttpStatus.NOT_FOUND));
+        this.subscriptionService.removePetFromSubscription(
+                subscription,
+                pet,
+                (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+        );
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping

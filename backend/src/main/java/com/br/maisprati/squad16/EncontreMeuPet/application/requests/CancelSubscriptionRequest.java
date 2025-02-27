@@ -29,7 +29,8 @@ public record CancelSubscriptionRequest(
                 null,
                 null,
                 LocalDate.parse(subscription.cancellationDate),
-                subscription.cancellationReason
+                subscription.cancellationReason,
+                null
         );
     }
 }

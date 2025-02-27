@@ -12,4 +12,5 @@ import java.util.List;
 public interface SubscriptionPetRepository extends JpaRepository<SubscriptionPet, SubscriptionPetId>
 {
     List<SubscriptionPet> getAllBySubscriptionAndRemovalDateIsNull(Subscription subscription);
+    List<SubscriptionPet> getAllBySubscription(Subscription subscription);
 }

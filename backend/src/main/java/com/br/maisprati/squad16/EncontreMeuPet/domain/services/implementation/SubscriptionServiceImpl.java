@@ -8,6 +8,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.SubscriptionStatus;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.ApplicationException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionAlreadyExistsException;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.SubscriptionDateInvalidException;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Subscription;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.SubscriptionPet;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.SubscriptionPetId;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -71,10 +73,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public List<SubscriptionDTO> getAllSubscriptions(User user) {
-        return List.of();
-    }
-    @Override
     @Transactional
     public List<SubscriptionPetDTO> addPets(
                                          SubscriptionDTO subscription,
@@ -123,6 +121,30 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
+    public void removePetFromSubscription(SubscriptionDTO subscription, PetDTO pet, User user) throws ApplicationException
+    {
+        var sub = this.subscriptionRepository.findBySubscriptionIdAndUser(
+                subscription.subscriptionId(),
+                user
+        ).orElseThrow(() -> new ApplicationException("Plano não econtrado", HttpStatus.NOT_FOUND));
+        if(sub.getStatus() != SubscriptionStatus.ACTIVE){
+            throw new ApplicationException("Plano não desativado.");
+        }
+        var subPets = this.subscriptionPetRepository.getAllBySubscriptionAndRemovalDateIsNull(
+                sub
+        );
+        if(subPets.isEmpty()){
+            throw new ApplicationException("Plano sem animais.");
+        }
+        for (var activePet: subPets){
+            if(Objects.equals(pet.petId(), activePet.getId().getPetId())) {
+                activePet.setRemovalDate(LocalDate.now());
+                this.subscriptionPetRepository.save(activePet);
+            }
+        }
+    }
+
+    @Override
     public Optional<SubscriptionDTO> findById(Long id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user.getRole().equals(Roles.ADMIN)) {
@@ -137,11 +159,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public List<SubscriptionDTO> findAll(User user) {
         if (user.getRole().equals(Roles.ADMIN)) {
-            return this.subscriptionRepository.findAll().stream().map(
-                    SubscriptionDTO::toDTO
-            ).collect(Collectors.toList());
+            return this.subscriptionRepository.findAll().stream().map(subModel -> {
+                var pets = this.subscriptionPetRepository.getAllBySubscription(subModel).stream().map(SubscriptionPetDTO::toDTO).collect(Collectors.toList());
+                return SubscriptionDTO.toDTO(subModel, pets);
+            }).collect(Collectors.toList());
         }
-        return this.subscriptionRepository.findAllByUser(user).stream().map(SubscriptionDTO::toDTO).collect(Collectors.toList());
+        return this.subscriptionRepository.findAllByUser(user).stream().map(subModel -> {
+            var pets = this.subscriptionPetRepository.getAllBySubscription(subModel).stream().map(SubscriptionPetDTO::toDTO).collect(Collectors.toList());
+            return SubscriptionDTO.toDTO(subModel, pets);
+        }).collect(Collectors.toList());
     }
     @Transactional
     @Override

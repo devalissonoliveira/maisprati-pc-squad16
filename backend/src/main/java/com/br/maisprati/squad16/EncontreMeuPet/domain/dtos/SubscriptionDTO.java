@@ -5,8 +5,10 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.SubscriptionStatus;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Plan;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Subscription;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.Function;
 
 public record SubscriptionDTO(
@@ -19,9 +21,10 @@ public record SubscriptionDTO(
         BigDecimal amountPaid,
         SubscriptionStatus status,
         LocalDate cancellationDate,
-        String cancellationReason) {
-
-    public static SubscriptionDTO fromModel(Subscription subscription) {
+        String cancellationReason,
+        List<SubscriptionPetDTO> pets
+) {
+    public static SubscriptionDTO toDTO(Subscription subscription) {
         return new SubscriptionDTO(
                 subscription.getSubscriptionId(),
                 subscription.getUser().getUserId(),
@@ -32,12 +35,31 @@ public record SubscriptionDTO(
                 subscription.getAmountPaid(),
                 subscription.getStatus(),
                 subscription.getCancellationDate(),
-                subscription.getCancellationReason()
+                subscription.getCancellationReason(),
+                null
         );
     }
-
+    public static SubscriptionDTO toDTO(Subscription subscription, List<SubscriptionPetDTO> pets) {
+        return new SubscriptionDTO(
+                subscription.getSubscriptionId(),
+                subscription.getUser().getUserId(),
+                subscription.getPlan().getPlanId(),
+                subscription.getStartDate(),
+                subscription.getEndDate(),
+                subscription.getPeriodType(),
+                subscription.getAmountPaid(),
+                subscription.getStatus(),
+                subscription.getCancellationDate(),
+                subscription.getCancellationReason(),
+                pets
+        );
+    }
+    public Subscription toModel() {
+        return toModel(this);
+    }
     public static Subscription toModel(SubscriptionDTO subscription) {
         var sub = new Subscription();
+        sub.setSubscriptionId(subscription.subscriptionId);
         sub.setAmountPaid(subscription.amountPaid());
         sub.setStatus(subscription.status());
         sub.setStartDate(subscription.startDate());
@@ -47,7 +69,6 @@ public record SubscriptionDTO(
         sub.setCancellationReason(subscription.cancellationReason());
         return sub;
     }
-
     public static Subscription toModel(SubscriptionDTO subscription, Function< Long, User> userFunction, Function<Long, Plan> planFunction) {
         Subscription sub = toModel(subscription);
         var user = userFunction.apply(subscription.userId);
@@ -56,16 +77,15 @@ public record SubscriptionDTO(
         sub.setPlan(plan);
         return sub;
     }
-
     public static Subscription toModel(SubscriptionDTO subscription, User user, Plan plan) {
         Subscription sub = toModel(subscription);
         sub.setUser(user);
         sub.setPlan(plan);
         return sub;
     }
-
-    public boolean isValidRangeDate() {
+    public boolean isValidRangeDate()
+    {
         var model = SubscriptionDTO.toModel(this);
-        return model.getStartDate().isBefore(model.getEndDate());
+        return  model.getStartDate().isBefore(model.getEndDate());
     }
 }

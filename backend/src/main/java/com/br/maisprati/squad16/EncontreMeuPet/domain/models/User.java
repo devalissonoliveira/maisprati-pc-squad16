@@ -65,7 +65,7 @@ public class User implements UserDetails {
         this.registrationDate = LocalDateTime.now();
         this.active = true;
     }
-
+    public boolean isAdmin() { return this.role == Roles.ADMIN; }
     public Long getUserId() {
         return userId;
     }

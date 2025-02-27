@@ -23,7 +23,6 @@ public record CreatePetRequest(
         @NotNull
         Boolean hasPedigree,
         String pedigreeFile,
-        @NotEmpty
         String observations,
         @NotEmpty
         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

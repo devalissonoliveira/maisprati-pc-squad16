@@ -25,7 +25,7 @@ public class PetServiceImpl implements PetService {
         var pet = petDto.toModel();
         pet.setUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         pet.setActive(true);
-        return PetDTO.fromModelToDTO(this.petRepository.save(pet));
+        return PetDTO.toDTO(this.petRepository.save(pet));
     }
 
     @Override
@@ -35,13 +35,13 @@ public class PetServiceImpl implements PetService {
                 (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
         )
                 .stream()
-                .map(PetDTO::fromModelToDTO)
+                .map(PetDTO::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<PetDTO> all() {
-        return this.petRepository.findAll().stream().map(PetDTO::fromModelToDTO).collect(Collectors.toList());
+        return this.petRepository.findAll().stream().map(PetDTO::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -49,12 +49,12 @@ public class PetServiceImpl implements PetService {
         var currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(currentUser.isAdmin()){
             return this.petRepository.findById(id)
-                    .map(PetDTO::fromModelToDTO);
+                    .map(PetDTO::toDTO);
         }
         return this.petRepository.findByPetIdAndUser(
                 id,
                 currentUser
-        ).map(PetDTO::fromModelToDTO);
+        ).map(PetDTO::toDTO);
     }
 
     @Override

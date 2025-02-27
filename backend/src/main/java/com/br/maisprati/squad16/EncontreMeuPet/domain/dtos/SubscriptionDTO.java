@@ -8,10 +8,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public record SubscriptionDTO(
         Long subscriptionId,
@@ -25,7 +22,7 @@ public record SubscriptionDTO(
         LocalDate cancellationDate,
         String cancellationReason
 ) {
-    public static SubscriptionDTO fromModel(Subscription subscription) {
+    public static SubscriptionDTO toDTO(Subscription subscription) {
         return new SubscriptionDTO(
                 subscription.getSubscriptionId(),
                 subscription.getUser().getUserId(),
@@ -39,8 +36,12 @@ public record SubscriptionDTO(
                 subscription.getCancellationReason()
         );
     }
+    public Subscription toModel() {
+        return toModel(this);
+    }
     public static Subscription toModel(SubscriptionDTO subscription) {
         var sub = new Subscription();
+        sub.setSubscriptionId(subscription.subscriptionId);
         sub.setAmountPaid(subscription.amountPaid());
         sub.setStatus(subscription.status());
         sub.setStartDate(subscription.startDate());

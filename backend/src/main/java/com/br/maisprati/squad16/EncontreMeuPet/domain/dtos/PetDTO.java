@@ -2,7 +2,6 @@ package com.br.maisprati.squad16.EncontreMeuPet.domain.dtos;
 
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.PetSpecies;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Pet;
-import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +18,7 @@ public record PetDTO(
         boolean active,
         Long userId
 ) {
-    public static PetDTO fromModelToDTO(Pet pet)
+    public static PetDTO toDTO(Pet pet)
     {
         return new PetDTO(
                 pet.getPetId(),
@@ -36,9 +35,9 @@ public record PetDTO(
                 );
     }
     public Pet toModel() {
-        return PetDTO.fromDTOtoModel(this);
+        return PetDTO.toModel(this);
     }
-    public static Pet fromDTOtoModel(PetDTO petDTO)
+    public static Pet toModel(PetDTO petDTO)
     {
         var pet = new Pet();
         pet.setPetId(petDTO.petId());

@@ -38,7 +38,7 @@ function NavBar() {
     { name: "Home", href: "/", current: true },
     { name: "Funcionamento", href: "/CadastroClient", current: false },
     { name: "Planos", href: "/PetRegistration", current: false },
-    { name: "Contatos", href: "#", current: false },
+    { name: "Contatos", href: "/Contato", current: false },
   ];
 
   const userNavigation = [
@@ -199,25 +199,23 @@ function NavBar() {
                 <div className="ml-4 flex items-center md:ml-6">
                   <button
                     type="button"
-                    onClick={toggleMenu}
                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
-                    {/* <BellIcon aria-hidden="true" className="size-6" /> */}
                     <FaRegBell className="size-5 font-light" />
                   </button>
 
-                  {/* Profile dropdown */}
                   <div className="relative ml-3">
                     <div>
                       <div className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">Open user menu</span>
+                        {/* <span className="absolute -inset-1.5" /> */}
+                        {/* <span className="sr-only">Open user menu</span> */}
                         <img
                           alt="IMG"
                           src={user.imageUrl}
-                          className="size-8 rounded-full"
+                          onClick={toggleMenu}
+                          className="size-8 rounded-full cursor-pointer"
                         />
                       </div>
                     </div>

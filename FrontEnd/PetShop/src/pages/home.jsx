@@ -140,20 +140,20 @@ const Home = () => {
         {/* </article> */}
       </main>
       {/* footer tem o tamanho de 72px */}
-      <footer className="bg-blue-500 w-full h-16 py-2 text-center text-white fixed bottom-0">
+      <footer className="bg-blue-500 w-full h-14 py-2 text-center text-white fixed bottom-0 ">
         <p>
           &#x24B8;<span className="capitalize">encontre meu pet.</span>{" "}
           <span className="capitalize">todos</span> os direitos reservados.
         </p>
-        <p className="flex items-center justify-center">
-          <Link>
+        <p className="flex items-center justify-center text-base/4">
+          <a>
             <span className="capitalize">termos</span> de{" "}
             <span className="capitalize">uso</span> |{" "}
-          </Link>
-          <Link>
+          </a>
+          <a>
             <span className="capitalize"> politica</span> de{" "}
             <span className="capitalize">privacdade</span>
-          </Link>
+          </a>
         </p>
       </footer>
     </>

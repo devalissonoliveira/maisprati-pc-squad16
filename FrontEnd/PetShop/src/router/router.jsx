@@ -6,11 +6,13 @@ import CadastroClient from "../pages/cadastroClient";
 import PetRegistration from "../pages/petRegistration";
 import RecoverPassword from "../pages/recoverPassword";
 import Home from "../pages/home";
+import Contato from "../pages/contato";
 
 const RoutesOfPage = () => {
    return(
             <Routes>
                 <Route Component = { Home }  path="/" exact />
+                <Route Component = { Contato }  path="/Contato" exact />
                 <Route Component = { RecoverPassword }  path="/RecoverPassword" exact />
                 <Route Component = { CadastroClient }  path="/CadastroClient" />
                 <Route Component = { PetRegistration }  path="/PetRegistration" />

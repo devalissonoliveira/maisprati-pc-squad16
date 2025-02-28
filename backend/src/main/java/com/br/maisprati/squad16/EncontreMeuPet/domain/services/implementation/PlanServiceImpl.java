@@ -48,7 +48,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public boolean update(Long planId, PlanDTO updateDTO) {
         var plan = this.planRepository.findById(planId).orElse(null);
-        if (plan.getPlanId() == null) {
+        if (plan == null) {
             throw new ValidationException("Plan id is null");
         }
         plan.setMaxPets(updateDTO.maxPets());

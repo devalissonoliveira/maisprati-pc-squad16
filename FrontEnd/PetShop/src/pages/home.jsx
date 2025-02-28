@@ -7,9 +7,11 @@ import { BsQrCode } from "react-icons/bs";
 import { LuBellRing } from "react-icons/lu";
 
 const Home = () => {
+
   return (
     <>
-      <main className=" h-[calc(100%-5rem)] sm:h-[calc(100%-8rem)]">
+      {/* h-[calc(100%-20rem)] sm:h-[calc(100%-20rem)] */}
+      <main className="">
         <article className="w-full flex items-start justify-center px-4 sm:px-6 sm:py-20 max-sm:py-20">
           <div className="w-full flex flex-col sm:flex-row justify-center items-center relative gap-4">
             <img 
@@ -18,13 +20,13 @@ const Home = () => {
               className="w-40 h-40 rounded-full object-cover absolute bg-black right-0"/>
             <Link
               to="/CadastroClient"
-              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-blue-500 px-7 py-3 rounded-md  bg-yellow-500 hover:bg-yellow-400"
+              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-blue-600 px-7 py-3 rounded-md  bg-yellow-400 hover:bg-yellow-300 font-semibold"
             >
               Cadastre-se agora
             </Link>
             <Link
               to="/CadastroClient"
-              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-white px-14 py-3 rounded-md bg-blue-500 hover:bg-blue-400 "
+              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-white px-14 py-3 rounded-md bg-blue-500 hover:bg-blue-400 font-semibold"
             >
               <span className="capitalize">saiba</span> mais
             </Link>
@@ -140,12 +142,12 @@ const Home = () => {
         {/* </article> */}
       </main>
       {/* footer tem o tamanho de 72px */}
-      <footer className="bg-blue-500 w-full h-14 py-2 text-center text-white fixed bottom-0 ">
+      <footer className="bg-blue-500 text-xs sm:text-sm w-full h-14 py-2 text-center text-white fixed bottom-0 ">
         <p>
           &#x24B8;<span className="capitalize">encontre meu pet.</span>{" "}
           <span className="capitalize">todos</span> os direitos reservados.
         </p>
-        <p className="flex items-center justify-center text-base/4">
+        <p className="flex items-center justify-center text-xs sm:text-sm ">
           <a>
             <span className="capitalize">termos</span> de{" "}
             <span className="capitalize">uso</span> |{" "}

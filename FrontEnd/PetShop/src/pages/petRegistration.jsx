@@ -17,12 +17,12 @@ function Register() {
   return (
     <>
       <form method="post" className="flex items-center justify-center max-w-full">
-        <div className="flex max-h-full w-screen sm:w-[75%] md:w-[50%] transition-all bg-green-500 duration-200 ease-linear flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex max-h-full w-screen sm:w-[75%] md:w-[50%] transition-all duration-200 ease-linear flex-col justify-center px-6 py-12 lg:px-8">
           <h2 className="text-base/7 font-semibold text-gray-900">
-            Register your Pet
+            <span className="capitalize">registre</span> seu pet
           </h2>
           <p className="mt-1 text-sm/6 text-gray-600">
-            Use a permanent address where you can receive mail.
+            <span className="capitalize">Use</span> um endereço permanente onde você possa receber correspondência.
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

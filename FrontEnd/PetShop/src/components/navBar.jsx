@@ -86,14 +86,14 @@ function NavBar() {
               {/* SECTION DIREITA DA IMAGEM DO USER/SINO */}
               <div className="hidden md:block">
                <div className="ml-4 flex items-center md:ml-6">
+
+                  <div className="relative ml-3 flex items-center gap-1">
                   <button
                     type="button"
                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                   >
                     <FaRegBell className="size-5 font-light" />
                   </button>
-
-                  <div className="relative ml-3">
                       <div className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                         <img
                           alt="IMG"
@@ -105,7 +105,7 @@ function NavBar() {
                     {isMenuOpen && (
                       <div
                         transition
-                        className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                        className="absolute right-3 top-8 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                       >
                         {userNavigation.map((item) => (
                           <div key={item.name}>

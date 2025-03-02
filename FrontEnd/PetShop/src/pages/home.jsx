@@ -17,7 +17,7 @@ const Home = () => {
             <img 
               src="https://picsum.photos/id/237/200/300" // Substitua pelo link da sua imagem
               alt="Imagem" 
-              className="w-40 h-40 rounded-full object-cover absolute bg-black right-0"/>
+              className="w-40 h-40 rounded-full object-cover block mb-6 sm:absolute bg-black sm:right-0"/>
             <Link
               to="/CadastroClient"
               className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-blue-600 px-7 py-3 rounded-md  bg-yellow-400 hover:bg-yellow-300 font-semibold"
@@ -25,7 +25,7 @@ const Home = () => {
               Cadastre-se agora
             </Link>
             <Link
-              to="/CadastroClient"
+              to="/SaibaMais"
               className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-white px-14 py-3 rounded-md bg-blue-500 hover:bg-blue-400 font-semibold"
             >
               <span className="capitalize">saiba</span> mais

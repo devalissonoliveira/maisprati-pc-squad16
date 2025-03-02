@@ -42,7 +42,7 @@ function cadastroClient() {
         onSubmit={handleSubmit}
         className="flex items-center justify-center"
       >
-        <div className="flex min-h-full w-screen sm:w-[50%] flex-col transition-all duration-200 ease-linear justify-center px-6 py-12 lg:px-8 ">
+        <div className="flex max-h-full w-screen sm:w-[75%] md:w-[50%] transition-all duration-200 ease-linear flex-col justify-center px-6 py-12 lg:px-8">
           <h2 className="text-base/7 font-semibold text-gray-900">
             Informações pessoais para cadastro
           </h2>

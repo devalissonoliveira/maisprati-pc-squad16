@@ -1,5 +1,5 @@
 # Etapa de build: usa uma imagem do Gradle para compilar a aplicação
-FROM gradle:8.4.0-jdk17 AS build
+FROM gradle:8.11.1-jdk17 AS build
 
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /app

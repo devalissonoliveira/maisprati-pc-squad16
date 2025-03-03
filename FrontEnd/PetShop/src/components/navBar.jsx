@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { FaRegBell } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
@@ -10,8 +10,8 @@ function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuProfileOpen, setIsMenuProfileOpen] = useState(false);
   const [isUserLogged, setIsUserLogged] = useState(true)
-  const { logout } = useAuthentication()
-
+  const { logout, login, token } = useAuthentication()
+  const navigate = useNavigate()
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
@@ -42,9 +42,8 @@ function NavBar() {
   ];
 
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: '#', onClick: logout  },
+    { name: "Perfil", href: "#" },
+    token ? { name: "Logout", href: '#', onClick: logout  } : { name: "Log in", href: '#', onClick: () =>  navigate('/login') },
   ];
 
   return (

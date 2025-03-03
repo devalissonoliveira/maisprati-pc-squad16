@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import useApi from '../utils/api';
 import { isAxiosError } from 'axios';
 import useStorage from '../utils/useStorage';
+import { useAlert } from './AlertContext';
 const httpStatusAction = {
     '401': (content) => {
         alert('Senha ou email incorretos')
@@ -22,15 +23,21 @@ export function AuthProvider(props) {
     const { getObjectByKey, setByKey, removeByKey } = useStorage();
     const [token, setToken] = useState(() => getObjectByKey('token'));
     const profile = useMemo(() => getObjectByKey('profile'), [token])
-    const { api } = useApi(token);
+    const { showAlert } = useAlert()
+    const { api } = useApi();
     const loadProfile = useCallback(async () => {
+        const token = getObjectByKey('token');
         try {
-            const { data } = await api.get('/profile')
+            const { data } = await api.get('/profile', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             setByKey('profile', data)
         } catch (e) {
             if (isAxiosError(e)) {
                 if (e.response?.status == 401) {
-                    alert('Sua sessão expirou, faça login novamente')
+                    showAlert('Sua sessão expirou, faça login novamente', 'error')
                     logout()
                 }
             }
@@ -45,12 +52,15 @@ export function AuthProvider(props) {
         })
         const token = data.accessToken;
         setByKey('token', token);
-        loadProfile().then(() => setToken(token))
+        setToken(token)
+        loadProfile()
         return token;
     }
     const logout = () => {
-        setToken(null)
         removeByKey('token')
+        removeByKey('profile')
+        setToken(null)
+
     }
     return (
         <AuthContext.Provider value={{ login, token, logout, profile }}>
@@ -62,9 +72,10 @@ export function AuthProvider(props) {
 export const useAuthenticatedApi = () => {
     const { token, logout } = useContext(AuthContext);
     const { api } = useApi(token);
+    const { showAlert } = useAlert()
     api.interceptors.response.use((response) => response, (e) => {
         if (e.response.status == 401) {
-            alert('Sua sessão expirou, faça login novamente')
+            showAlert('Sua sessão expirou, faça login novamente', 'error')
             logout()
         }
         return Promise.reject(e);

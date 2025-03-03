@@ -9,6 +9,7 @@ import Home from "../pages/home";
 import Contato from "../pages/contato";
 import SaibaMais from "../pages/saibaMais";
 import { useAuthentication } from "../context/AuthContext";
+import ListPets from "../pages/ListPets";
 export const ProtectedRoute = ({ children }) => {
     const { token } = useAuthentication();
     if (!token) {
@@ -31,6 +32,14 @@ const RoutesOfPage = () => {
                     <PetRegistration />
                 </ProtectedRoute>
             } path="/PetRegistration" />
+            <Route 
+                element={
+                    <ProtectedRoute >
+                        <ListPets />
+                    </ProtectedRoute>
+                }
+                path="/animais"
+            />
             <Route element={<Login />} path="/login" />
         </Routes>
     )

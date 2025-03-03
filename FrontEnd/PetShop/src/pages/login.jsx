@@ -25,20 +25,20 @@ function Login() {
     setIsLoading(true)
     login(email, password)
       .then(e => {
-        navigate('/PetRegistration')
         showAlert('Logado com sucesso!')
+        navigate('/PetRegistration')
       })
       .catch(e => {
         if (isAxiosError(e)) {
           if (e.response?.status == 401) {
-            showAlert('Email e senha incorretas', 'error');
+            showAlert(e.response?.data.message, 'error');
           } else if (e.response?.status == 400) {
             e.response.data?.forEach(error => {
               setErrors({ [error.field]: error.defaultMessage })
             })
           }
         } else {
-          window.alert('Falha');
+          showAlert('Erro ao tentar logar', 'error');
           console.error(e)
         }
       })

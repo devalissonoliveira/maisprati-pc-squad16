@@ -4,11 +4,13 @@ import { Link} from "react-router-dom";
 import { FaRegBell } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
+import { useAuthentication } from "../context/AuthContext";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuProfileOpen, setIsMenuProfileOpen] = useState(false);
   const [isUserLogged, setIsUserLogged] = useState(true)
+  const { logout } = useAuthentication()
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -42,7 +44,7 @@ function NavBar() {
   const userNavigation = [
     { name: "Your Profile", href: "#" },
     { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+    { name: "Sign out", href: '#', onClick: logout  },
   ];
 
   return (
@@ -67,6 +69,7 @@ function NavBar() {
                     <Link
                       key={item.name}
                       to={item.href}
+                      
                       aria-current={item.current ? "page" : undefined}
                       className={classNames(
                         item.current
@@ -123,6 +126,7 @@ function NavBar() {
                         {userNavigation.map((item) => (
                           <div key={item.name}>
                             <Link
+                              onClick={e => item.onClick && item.onClick() }
                               to={item.href}
                               className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                             >

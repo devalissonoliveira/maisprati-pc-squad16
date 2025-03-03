@@ -17,11 +17,6 @@ function App() {
               <RoutesOfPage />
               <Footer />
             </article>
-
-            <article className="w-screen min-h-screen box-border">
-              <NavBar />
-              <RoutesOfPage />
-            </article>
           </AuthProvider>
         </AlertProvider>
       </BrowserRouter>

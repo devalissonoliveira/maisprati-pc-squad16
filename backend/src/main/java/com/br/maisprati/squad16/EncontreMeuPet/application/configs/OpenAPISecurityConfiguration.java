@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.annotations.servers.Servers;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -28,6 +30,18 @@ import org.springframework.context.annotation.Configuration;
         type = SecuritySchemeType.HTTP,
         bearerFormat = "JWT",
         scheme = "bearer"
+
 )
+@Servers({
+        @Server(
+                url = "https://api.yuresamarone.shop",
+                description = "Production Server"
+        )
+        ,
+        @Server(
+                url = "http://localhost:8080",
+                description = "Teste Server"
+        )
+})
 public class OpenAPISecurityConfiguration {
 }

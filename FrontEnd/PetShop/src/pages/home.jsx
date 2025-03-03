@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
       {/* h-[calc(100%-20rem)] sm:h-[calc(100%-20rem)] */}
-      <main className="">
+      <main>
         <article className="w-full flex items-start justify-center px-4 sm:px-6 sm:py-20 max-sm:py-20">
           <div className="w-full flex flex-col sm:flex-row justify-center items-center relative gap-4">
             <img 
@@ -40,8 +40,8 @@ const Home = () => {
           </h2>
           {/* RESOLVER A QUESTAO DO ALINHAMENTO AQUI*/}
           <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-            <div class="bg-gray-300 rounded-xl h-60 flex flex-col items-center justify-center">
-              <FaHandshake className="size-[25%]" />
+            <div class="bg-gray-200 rounded-xl h-60 flex flex-col items-center justify-center shadow-lg">
+              <FaHandshake className="size-[20%]" />
               <div class="mt-4 text-center">
                 <p class="text-sm text-gray-700">
                   <a href="#" className="font-semibold text-blue-600">
@@ -54,8 +54,8 @@ const Home = () => {
               </div>
             </div>
 
-            <div class="bg-gray-300 rounded-xl h-60 flex flex-col items-center justify-center">
-              <PiUserFocusDuotone className="size-[25%]" />
+            <div class="bg-gray-200 rounded-xl h-60 flex flex-col items-center justify-center shadow-lg">
+              <PiUserFocusDuotone className="size-[20%]" />
               <div class="mt-4 text-center">
                 <p class="text-sm text-gray-700">
                   <a href="#" className="font-semibold text-blue-600">
@@ -68,8 +68,8 @@ const Home = () => {
               </div>
             </div>
 
-            <div class="bg-gray-300 h-60 rounded-xl flex flex-col items-center justify-center">
-              <LuBellRing className="size-[25%]" />
+            <div class="bg-gray-200 rounded-xl h-60 flex flex-col items-center justify-center shadow-lg">
+              <LuBellRing className="size-[20%]" />
               <div class="mt-4 text-center">
                 <p class="text-sm text-gray-700">
                   <a href="#" className="font-semibold text-blue-600">
@@ -86,14 +86,13 @@ const Home = () => {
           </div>
         </div>
 
-        <div class="mx-auto max-w-2xl px-4 py-11 sm:px-6 sm:mb-24 lg:max-w-7xl lg:px-8">
+        <div class="mx-auto max-w-2xl px-4 py-11 sm:px-6 sm:mb-10 lg:max-w-7xl lg:px-8">
           <h2 class="text-2xl font-bold tracking-tight text-gray-900">
             <span className="capitalize">como funciona</span>
           </h2>
-          {/* RESOLVER A QUESTAO DO ALINHAMENTO AQUI*/}
           <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-            <div class="bg-gray-300 rounded-xl h-60 flex flex-col items-center justify-center">
-              <FaHandshake className="size-[25%]" />
+            <div class="bg-gray-200 rounded-xl h-60 flex flex-col items-center justify-center shadow-lg">
+              <FaHandshake className="size-[20%]" />
               <div class="mt-4 text-center">
                 <p class="text-sm text-gray-700">
                   <a href="#" className="font-semibold text-blue-600">
@@ -106,8 +105,8 @@ const Home = () => {
               </div>
             </div>
 
-            <div class="bg-gray-300 rounded-xl h-60 flex flex-col items-center justify-center">
-              <BsQrCode className="size-[25%]" />
+            <div class="bg-gray-200 rounded-xl h-60 flex flex-col items-center justify-center shadow-lg">
+              <BsQrCode className="size-[20%]" />
               <div class="mt-4 text-center">
                 <p class="text-sm text-gray-700">
                   <a href="#" className="font-semibold text-blue-600">
@@ -122,8 +121,8 @@ const Home = () => {
               </div>
             </div>
 
-            <div class="bg-gray-300 h-60 rounded-xl flex flex-col items-center justify-center">
-              <GrMapLocation className="size-[25%]" />
+            <div class="bg-gray-200 rounded-xl h-60 flex flex-col items-center justify-center shadow-lg">
+              <GrMapLocation className="size-[20%]" />
               <div class="mt-4 text-center">
                 <p class="text-sm text-gray-700">
                   <a href="#" className="font-semibold text-blue-600">
@@ -140,24 +139,7 @@ const Home = () => {
           </div>
         </div>
         {/* </article> */}
-      </main>
-      {/* footer tem o tamanho de 72px */}
-      <footer className="bg-blue-500 text-xs sm:text-sm w-full h-14 py-2 text-center text-white fixed bottom-0 ">
-        <p>
-          &#x24B8;<span className="capitalize">encontre meu pet.</span>{" "}
-          <span className="capitalize">todos</span> os direitos reservados.
-        </p>
-        <p className="flex items-center justify-center text-xs sm:text-sm ">
-          <a>
-            <span className="capitalize">termos</span> de{" "}
-            <span className="capitalize">uso</span> |{" "}
-          </a>
-          <a>
-            <span className="capitalize"> politica</span> de{" "}
-            <span className="capitalize">privacdade</span>
-          </a>
-        </p>
-      </footer>
+      </main> 
     </>
   );
 };

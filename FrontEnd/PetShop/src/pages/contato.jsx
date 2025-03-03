@@ -2,8 +2,8 @@ import React from "react";
 
 const Contato = () => {
   return (
-    <section className="bg-gray-50">
-      <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+    <section className="overflow-hidden ">
+      <div className="mt-8 py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 ">
           Contate-nos
         </h2>

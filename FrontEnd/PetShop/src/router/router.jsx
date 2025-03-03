@@ -13,6 +13,7 @@ const RoutesOfPage = () => {
    return(
             <Routes>
                 <Route Component = { Home }  path="/" exact />
+                <Route Component = { Login }  path="/Login" exact />
                 <Route Component = { Contato }  path="/Contato" exact />
                 <Route Component = { SaibaMais }  path="/SaibaMais" exact />
                 <Route Component = { RecoverPassword }  path="/RecoverPassword" exact />

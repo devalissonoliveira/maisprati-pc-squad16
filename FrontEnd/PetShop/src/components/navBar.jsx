@@ -8,7 +8,7 @@ import { IoCloseSharp } from "react-icons/io5";
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuProfileOpen, setIsMenuProfileOpen] = useState(false);
-  const [isUserLogged, setIsUserLogged] = useState(false)
+  const [isUserLogged, setIsUserLogged] = useState(true)
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -47,7 +47,7 @@ function NavBar() {
 
   return (
     <>
-      <article className="min-h-full">
+      <article className="min-w-full z-10">
         <nav className="bg-gray-800">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
@@ -88,13 +88,15 @@ function NavBar() {
                <div className="ml-4 flex items-center md:ml-6">
 
                   <div className="relative ml-3 flex items-center gap-1">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
-                  >
-                    <FaRegBell className="size-5 font-light" />
-                  </button>
-                      <div className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                    {isUserLogged ? (
+                    <div className="flex items-center space-x-3">
+                      <button
+                        type="button"
+                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                      >
+                        <FaRegBell className="size-5 font-light" />
+                      </button>
+                      <div className="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                         <img
                           alt="IMG"
                           src={user.imageUrl}
@@ -102,6 +104,17 @@ function NavBar() {
                           className="size-8 rounded-full cursor-pointer"
                         />
                       </div>
+                    </div>
+                    ) :
+                    ( <button
+                      type="button"
+                      className="capitalize rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      <Link to="/Login">
+                        login
+                      </Link>
+                      </button>)
+                    }
                     {isMenuOpen && (
                       <div
                         transition

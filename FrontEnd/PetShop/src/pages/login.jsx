@@ -62,7 +62,11 @@ function Login() {
                 type="submit"
                 className="rounded-md bg-blue-600 px-3 py-2 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 capitalize w-full text-lg"
               >
-                entrar
+                <Link
+                  to="/"
+                >
+                  entrar
+                </Link> 
               </button>
             </div>
           </div>

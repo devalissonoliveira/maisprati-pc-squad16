@@ -25,4 +25,4 @@ COPY --from=build /app/build/libs/EncontreMeuPet-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # Comando para executar a aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=America/Santarem" , "-jar", "app.jar"]

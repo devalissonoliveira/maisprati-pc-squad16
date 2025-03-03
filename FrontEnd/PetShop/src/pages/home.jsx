@@ -5,6 +5,7 @@ import { GrMapLocation } from "react-icons/gr";
 import { FaHandshake } from "react-icons/fa";
 import { BsQrCode } from "react-icons/bs";
 import { LuBellRing } from "react-icons/lu";
+import { MdOutlinePets } from "react-icons/md";
 
 const Home = () => {
 
@@ -20,13 +21,13 @@ const Home = () => {
               className="w-40 h-40 rounded-full object-cover block mb-6 sm:absolute bg-black sm:right-0"/>
             <Link
               to="/CadastroClient"
-              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-blue-600 px-7 py-3 rounded-md  bg-yellow-400 hover:bg-yellow-300 font-semibold"
+              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto sm:px-7 text-blue-600  py-3 rounded-md  bg-yellow-400 hover:bg-yellow-300 font-semibold"
             >
               Cadastre-se agora
             </Link>
             <Link
               to="/SaibaMais"
-              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto text-white px-14 py-3 rounded-md bg-blue-500 hover:bg-blue-400 font-semibold"
+              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto sm:px-14 text-white  py-3 rounded-md bg-blue-500 hover:bg-blue-400 font-semibold"
             >
               <span className="capitalize">saiba</span> mais
             </Link>
@@ -92,7 +93,7 @@ const Home = () => {
           </h2>
           <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
             <div class="bg-gray-200 rounded-xl h-60 flex flex-col items-center justify-center shadow-lg">
-              <FaHandshake className="size-[20%]" />
+              <MdOutlinePets className="size-[20%]" />
               <div class="mt-4 text-center">
                 <p class="text-sm text-gray-700">
                   <a href="#" className="font-semibold text-blue-600">

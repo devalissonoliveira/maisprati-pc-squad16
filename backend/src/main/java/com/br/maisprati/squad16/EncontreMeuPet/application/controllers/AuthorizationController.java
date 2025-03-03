@@ -3,6 +3,7 @@ package com.br.maisprati.squad16.EncontreMeuPet.application.controllers;
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CreateUserRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.LoginRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.services.TokenService;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.ProfileDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Address;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.City;
@@ -12,6 +13,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.AddressReposi
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.CityRepository;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.StateRepository;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.UserRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import java.time.LocalDateTime;
@@ -20,11 +22,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 public class AuthorizationController {
 
@@ -66,7 +68,16 @@ public class AuthorizationController {
             });
         }
     }
-
+    @SecurityRequirement(name = "Bearer Authentication")
+    @GetMapping("/profile")
+    public ResponseEntity<ProfileDTO> profile() {
+        var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var profile = new ProfileDTO(
+                user.getName(),
+                user.getEmail()
+        );
+        return ResponseEntity.ok(profile);
+    }
     @PostMapping("/register")
     @Transactional
     public ResponseEntity<?> createUser(@RequestBody @Valid CreateUserRequest request) {

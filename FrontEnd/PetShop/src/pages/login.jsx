@@ -48,7 +48,7 @@ function Login() {
     <>
       {/* Section de login */}
       <form method="post" onSubmit={handleSubmit} className="flex items-center justify-center">
-        <div className="flex w-[35%] flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex w-[35%] h-[calc(100vh-120px)] flex-col justify-center px-6 py-12 lg:px-8">
           <h2 className="capitalize text-2xl font-semibold text-blue-700">
             Login
           </h2>

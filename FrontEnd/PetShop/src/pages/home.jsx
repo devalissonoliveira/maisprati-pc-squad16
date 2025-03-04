@@ -21,13 +21,13 @@ const Home = () => {
               className="w-40 h-40 rounded-full object-cover block mb-6 sm:absolute bg-black sm:right-0"/>
             <Link
               to="/CadastroClient"
-              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto sm:px-7 text-blue-600  py-3 rounded-md  bg-yellow-400 hover:bg-yellow-300 font-semibold"
+              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto sm:px-7 text-blue-800  py-3 rounded-md  bg-yellow-400 hover:bg-yellow-300 font-semibold"
             >
               Cadastre-se agora
             </Link>
             <Link
               to="/SaibaMais"
-              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto sm:px-14 text-white  py-3 rounded-md bg-blue-500 hover:bg-blue-400 font-semibold"
+              className="capitelize text-center w-[calc(100%-8rem)] sm:w-auto sm:px-14 text-white  py-3 rounded-md bg-blue-800 hover:bg-blue-700 font-semibold"
             >
               <span className="capitalize">saiba</span> mais
             </Link>

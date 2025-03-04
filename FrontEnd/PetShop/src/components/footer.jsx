@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-blue-500 text-xs sm:text-sm w-full h-14 py-2 text-center text-white">
+      <footer className="bg-blue-800 text-xs sm:text-sm w-full h-14 py-2 text-center text-white">
         <p>
           &#x24B8;<span className="capitalize">encontre meu pet.</span>{" "}
           <span className="capitalize">todos</span> os direitos reservados.

@@ -13,17 +13,16 @@ import ListPets from "../pages/ListPets";
 export const ProtectedRoute = ({ children }) => {
     const { token } = useAuthentication();
     if (!token) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/Login" />;
     }
     return children;
 };
 const RoutesOfPage = () => {
     return (
         <Routes>
-            <Route element={
-                <Home />
-            } path="/" exact />
-            <Route element={< Contato />} path="/Contato" exact />
+            <Route element={<Navigate to="/"/>}/>
+            <Route element={<Home/>} path="/" exact />
+            <Route element={<Contato/>} path="/Contato" exact />
             <Route element={<SaibaMais />} path="/SaibaMais" exact />
             <Route element={<RecoverPassword />} path="/RecoverPassword" exact />
             <Route element={<CadastroClient />} path="/CadastroClient" />
@@ -40,7 +39,7 @@ const RoutesOfPage = () => {
                 }
                 path="/animais"
             />
-            <Route element={<Login />} path="/login" />
+            <Route element={<Login />} path="/Login" />
         </Routes>
     )
 }

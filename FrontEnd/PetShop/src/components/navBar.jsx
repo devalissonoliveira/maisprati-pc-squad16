@@ -1,7 +1,7 @@
 import React from "react";
 import MeuPet from "../assets/Enconte_meu_Pet.png"
 import { useState } from "react";
-import { Link, Navigate, useNavigate} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { FaRegBell } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";

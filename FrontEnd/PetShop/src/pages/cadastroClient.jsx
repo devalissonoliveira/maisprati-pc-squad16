@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function cadastroClient() {
   const [password, setPassword] = useState("");
@@ -302,6 +302,9 @@ function cadastroClient() {
                 />
               </div>
             </div>
+            <article className="sm:col-span-full mt-0 text-blue-400 font-normal text-end">
+              <Link to="/Login">Já tem cadastro, faça login aqui.</Link>
+            </article>
             {error && (
               <div className="sm:col-span-full">
                 <span

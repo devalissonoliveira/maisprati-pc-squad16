@@ -48,7 +48,7 @@ function Login() {
     <>
       {/* Section de login */}
       <form method="post" onSubmit={handleSubmit} className="flex items-center justify-center">
-        <div className="flex w-[35%] h-[calc(100vh-120px)] flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex w-[100%] sm:w-[70%] md:w-[35%] ease-linear duration-200 transform-all h-[calc(100vh-120px)] flex-col justify-center px-10 py-12 lg:px-8">
           <h2 className="capitalize text-2xl font-semibold text-blue-700">
             Login
           </h2>
@@ -96,19 +96,21 @@ function Login() {
             <article className="sm:col-span-full mt-0 text-blue-400 font-normal text-end">
               <Link to="/RecoverPassword">esqueceu sua senha?</Link>
             </article>
+            <article className="sm:col-span-full mt-0 text-blue-400 font-normal text-end">
+              <Link to="/CadastroClient">não é cadastrado, cadastre-se agora!</Link>
+            </article>
 
             <div className="mt-6 flex items-center justify-end gap-x-6 sm:col-span-full">
               <button
                 type="submit"
                 className="rounded-md bg-blue-600 px-3 py-2 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 capitalize w-full text-lg"
               >
-                <Link
-                  to="/"
-                >
-                  {isLoading ? <div class="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading">
-                    <span class="sr-only">Carregando...</span>
-                  </div> : 'Entrar'}
-                </Link>
+                {isLoading ?
+                  <div className="flex gap-2 justify-center items-center">
+                    <span class="text-white">Carregando</span>
+                    <div class="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-white rounded-full" role="status" aria-label="loading"></div> 
+                  </div>
+                  : 'Entrar'}
               </button>
             </div>
           </div>

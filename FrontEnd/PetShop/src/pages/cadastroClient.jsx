@@ -32,7 +32,7 @@ function cadastroClient() {
   }
 
   const redirect = () => {
-    navigate("/");
+    navigate("/Login");
   };
 
   return (

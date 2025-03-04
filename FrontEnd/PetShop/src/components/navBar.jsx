@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, Navigate, useNavigate} from "react-router-dom";
 import { FaRegBell } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
@@ -23,13 +23,9 @@ function NavBar() {
     return classes.filter(Boolean).join(" ");
   }
 
-  // const toggleIsLogedUser = () =>{
-  //   setIsUserLogged(!isUserLogged)
-  // }
-
   const user = {
-    name: "Tom Cook",
-    email: "tom@example.com",
+    name: "Jhon Doe",
+    email: "JhonDoe@example.com",
     imageUrl:
       "https://xsgames.co/randomusers/avatar.php?g=male",
   };
@@ -43,7 +39,7 @@ function NavBar() {
 
   const userNavigation = [
     { name: "Perfil", href: "#" },
-    token ? { name: "Logout", href: '#', onClick: logout  } : { name: "Log in", href: '#', onClick: () =>  navigate('/login') },
+    token ? { name: "Logout", href: '#', onClick: logout  } : { name: "Log in", href: '/Login', onClick: () =>  navigate('/Login') },
   ];
 
   return (
@@ -90,7 +86,7 @@ function NavBar() {
                <div className="ml-4 flex items-center md:ml-6">
 
                   <div className="relative ml-3 flex items-center gap-1">
-                    {isUserLogged ? (
+                    {token ? (
                     <div className="flex items-center space-x-3">
                       <button
                         type="button"

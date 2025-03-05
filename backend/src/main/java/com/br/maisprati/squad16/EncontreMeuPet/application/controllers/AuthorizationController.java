@@ -4,6 +4,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.application.requests.CreateUserRe
 import com.br.maisprati.squad16.EncontreMeuPet.application.requests.LoginRequest;
 import com.br.maisprati.squad16.EncontreMeuPet.application.services.TokenService;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.ProfileDTO;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Address;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.City;
@@ -12,6 +13,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.domain.models.User;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.AddressRepository;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.CityRepository;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.StateRepository;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.SubscriptionRepository;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthorizationController {
 
     private final UserRepository userRepository;
+    private final SubscriptionRepository subscriptionRepository; 
     private final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
@@ -42,7 +45,8 @@ public class AuthorizationController {
             AuthenticationManager authenticationManager,
             TokenService tokenService, PasswordEncoder passwordEncoder,
             StateRepository stateRepository, CityRepository cityRepository,
-            AddressRepository addressRepository) {
+            AddressRepository addressRepository,
+            SubscriptionRepository subscriptionRepository) {
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.tokenService = tokenService;
@@ -50,6 +54,7 @@ public class AuthorizationController {
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
         this.addressRepository = addressRepository;
+        this.subscriptionRepository = subscriptionRepository;
     }
 
     @PostMapping("/login")
@@ -72,9 +77,13 @@ public class AuthorizationController {
     @GetMapping("/profile")
     public ResponseEntity<ProfileDTO> profile() {
         var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var subs = this.subscriptionRepository.findByUserAndEndDateIsNull(user);
+        var subscription = subs.orElseGet(null);
+        var subscriptionDTO = subs == null ? null : SubscriptionDTO.toDTO(subscription);
         var profile = new ProfileDTO(
                 user.getName(),
-                user.getEmail()
+                user.getEmail(),
+                subscriptionDTO
         );
         return ResponseEntity.ok(profile);
     }

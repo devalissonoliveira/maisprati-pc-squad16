@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAuthenticatedApi } from "../context/AuthContext";
 export const petTagTranslation = (key) => {
     const terms = {
         'DOG': 'Cachorro',
         'OTHERS': 'Outros',
         'CAT': 'Gato',
-        'PARROT': 'Papagaio', 
+        'PARROT': 'Papagaio',
         'HAMSTER': 'Hamster'
     }
-    if(key in terms){
+    if (key in terms) {
         return terms[key]
     }
     return key;
@@ -16,13 +16,13 @@ export const petTagTranslation = (key) => {
 export default function ListPets() {
     const { api } = useAuthenticatedApi();
     const [pets, setPets] = useState([]);
-    const fetchPets = () => {
+
+    useEffect(() => {
         api.get('/pets')
             .then(({ data }) => {
                 setPets(data)
             })
-    }
-    useEffect(() => fetchPets(), []);
+    }, []);
     return (
         <div className="flex flex-col my-4">
             <div className="-m-1.5 overflow-x-auto">

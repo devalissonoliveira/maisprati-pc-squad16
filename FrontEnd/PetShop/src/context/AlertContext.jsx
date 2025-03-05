@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 import { Alert } from '../components/Alert';
 
 export const AlertContext = createContext({
@@ -8,11 +8,11 @@ export const AlertContext = createContext({
 export const AlertProvider = ({ children }) => {
     const [alerts, setAlert] = useState([]);
 
-    const showAlert = (message, type = 'success') => {
+    const showAlert = useCallback ((message, type = 'success') => {
         const id = Math.floor(Math.random() * 100);
         setAlert(state => ([...state, { id, type, message }]));
         setTimeout(() => setAlert(state => state.filter(alert => alert.id != id)), 5000);
-    };
+    }, []);
 
     return (
         <AlertContext.Provider value={{ alert, showAlert }}>

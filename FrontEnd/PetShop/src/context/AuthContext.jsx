@@ -73,13 +73,18 @@ export const useAuthenticatedApi = () => {
     const { token, logout } = useContext(AuthContext);
     const { api } = useApi(token);
     const { showAlert } = useAlert()
-    api.interceptors.response.use((response) => response, (e) => {
-        if (e.response.status == 401) {
-            showAlert('Sua sessão expirou, faça login novamente', 'error')
-            logout()
-        }
-        return Promise.reject(e);
-    });
+    useEffect( () => {
+        //Adicionar listener para o redirecionamento 
+        const id = api.interceptors.response.use((response) => response, (e) => {
+            if (e.response.status == 401) {
+                showAlert('Sua sessão expirou, faça login novamente', 'error')
+                logout()
+            }
+            return Promise.reject(e);
+        });
+        return () => api.interceptors.response.eject(id)
+    } , [])
+
     return { api };
 }
 export const useAuthentication = () => useContext(AuthContext);

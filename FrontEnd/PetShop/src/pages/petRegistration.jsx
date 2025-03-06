@@ -15,22 +15,22 @@ function Register() {
   const { api } = useAuthenticatedApi()
   const { showAlert } = useAlert()
   const [errors, setErrors] = useState({
-    name: null,
-    species: null,
-    breed: null,
-    age: 0,
-    observations: null,
-    registrationDate: null,
+    name: '',
+    species: '',
+    breed: '',
+    age: '',
+    observations: '',
+    registrationDate: '',
     active: true
   })
   const [form, setForm] = useState(
     {
-      name: null,
+      name: '',
       species: 'DOG',
-      breed: null,
+      breed: '',
       age: 0,
-      observations: null,
-      registrationDate: null,
+      observations: '',
+      registrationDate: new Date().toISOString().replace('Z', ''),
       active: true
     })
   function setFormField(field, value) {
@@ -46,12 +46,12 @@ function Register() {
     try {
       const data = await api.post('/pets', form);
       setForm({
-        name: null,
+        name: '',
         species: 'DOG',
-        breed: null,
+        breed: '',
         age: 0,
-        observations: null,
-        registrationDate: null,
+        observations: '',
+        registrationDate: new Date().toISOString().replace('Z', ''),
         active: true
       })
       showAlert('Criado com sucesso')
@@ -103,68 +103,60 @@ function Register() {
                 <input
                   id="name"
                   name="name"
+                  value={form.name}
+                  onChange={e => setFormField('name', e.target.value)}
                   type="text"
                   placeholder="Nome do seu pet."
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.name}</p>
+              <p className="text-sm text-red-600 mt-2"  >{errors.name}</p>
             </div>
 
             {/* Email address */}
 
-            <div className="sm:col-span-full">
-              <label
-                for="email"
-                className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start"
-              >
-                <span className="capitalize">email</span> address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Exemplo@gamil.com"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
+
             {/* ENDEREÇO */}
 
             <div className="sm:col-span-full">
               <label
-                for="race"
+                for="breed"
                 className="block font-medium text-gray-900 capitalize text-sm/6 sm:text-start"
               >
-                race
+                Raça
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="race"
-                  id="race"
+                  value={form.breed}
+                  onChange={e => setFormField('breed', e.target.value)}
+                  name="breed"
+                  id="breed"
                   placeholder="Shih tzu, Pastor Alemão..."
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
+              <p className="text-sm text-red-600 mt-2"  >{errors.breed}</p>
             </div>
             <div className="sm:col-span-full">
               <label
-                for="race"
+                for="species"
                 className="block font-medium text-gray-900 capitalize text-sm/6 sm:text-start"
               >
-                race
+                species
               </label>
               <div className="mt-2">
                 <select
                   name="species"
+                  value={form.species}
+                  onChange={e => setFormField('species', e.target.value)}
                   placeholder="Shih tzu, Pastor Alemão..."
-                  class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                  className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                 >
                   {Object.entries(terms).map(([key, value]) => <option value={key}>{value}</option>)}
                 </select>
               </div>
+              <p className="text-sm text-red-600 mt-2"  >{errors.species}</p>
             </div>
 
             <div className="sm:col-span-4">
@@ -178,15 +170,18 @@ function Register() {
                 <input
                   type="text"
                   name="idade"
+                  value={form.age}
+                  onChange={e => setFormField('age', e.target.value)}
                   id="idade"
                   placeholder="Shih tzu, Pastor Alemão..."
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
+              <p className="text-sm text-red-600 mt-2"  >{errors.age}</p>
             </div>
 
-            <div className="sm:col-span-2">
-              <div className="items-center">
+            <div className="sm:col-span-2 ">
+              <div className="items-center hidden">
                 <label
                   for="pedigre"
                   className="block font-medium text-gray-900 capitalize text-sm/6"
@@ -268,12 +263,15 @@ function Register() {
                 <textarea
                   rows="7"
                   type="text"
+                  value={form.observations}
+                  onChange={e => setFormField('observations', e.target.value)}
                   maxLength="512"
                   id="observations"
                   placeholder="Digite suas observações aqui..."
                   className="resize-none block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
+              <p className="text-sm text-red-600 mt-2"  >{errors.observations}</p>
             </div>
           </div>
           <div className="flex items-center justify-end mt-6 gap-x-6 col-span-full">

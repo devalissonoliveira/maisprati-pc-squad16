@@ -16,16 +16,7 @@ public record CreateSubscriptionRequest(
         @NotNull
         Long planId,
         @NotNull
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-        String startDate,
-        @NotNull
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-        String endDate,
-        @NotNull
-        String periodType,
-        @NotNull
-        @Min(0)
-        BigDecimal amountPaid
+        String periodType
 ) {
         public static SubscriptionDTO toDTO(CreateSubscriptionRequest createSubscriptionRequest, User user)
         {
@@ -33,10 +24,10 @@ public record CreateSubscriptionRequest(
                       null,
                         user.getUserId(),
                         createSubscriptionRequest.planId,
-                        LocalDate.parse(createSubscriptionRequest.startDate),
-                        LocalDate.parse(createSubscriptionRequest.endDate),
+                        LocalDate.now(),
+                        LocalDate.now(),
                         PeriodType.valueOf(PeriodType.class, createSubscriptionRequest.periodType),
-                        createSubscriptionRequest.amountPaid,
+                        BigDecimal.ZERO,
                         null,
                         null,
                         null,

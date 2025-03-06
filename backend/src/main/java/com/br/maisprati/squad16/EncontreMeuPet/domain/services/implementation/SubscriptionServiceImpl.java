@@ -3,6 +3,7 @@ package com.br.maisprati.squad16.EncontreMeuPet.domain.services.implementation;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.PetDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionPetDTO;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.PeriodType;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.SubscriptionStatus;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.exceptions.ApplicationException;
@@ -47,12 +48,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Transactional
     @Override
     public SubscriptionDTO create(SubscriptionDTO subscription) throws SubscriptionAlreadyExistsException, SubscriptionDateInvalidException, ApplicationException {
-        if(!subscription.isValidRangeDate()){
-            throw new SubscriptionDateInvalidException(
-                    subscription.startDate(),
-                    subscription.endDate()
-            );
-        }
+
+
         var user = this.userRepository.findById(subscription.userId()).get();
         var alreadyExists = this.subscriptionRepository.findByStatusAndUser(
                 SubscriptionStatus.ACTIVE,
@@ -67,6 +64,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 user,
                 plan
         );
+        if(sub.getPeriodType().equals(PeriodType.MONTHLY))
+        {
+            sub.setEndDate(sub.getStartDate().plusMonths(1));
+            sub.setAmountPaid(plan.getMonthlyPrice());
+        } else {
+            sub.setEndDate(sub.getStartDate().plusYears(1));
+            sub.setAmountPaid(plan.getAnnualPrice());
+        }
         sub.setStatus(
                 SubscriptionStatus.ACTIVE
         );

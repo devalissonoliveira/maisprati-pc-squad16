@@ -1,5 +1,5 @@
 # Etapa de build: usa uma imagem do Gradle para compilar a aplicação
-FROM gradle:8.4.0-jdk17 AS build
+FROM gradle:8.11.1-jdk17 AS build
 
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
@@ -25,4 +25,4 @@ COPY --from=build /app/build/libs/EncontreMeuPet-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # Comando para executar a aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=America/Santarem" , "-jar", "app.jar"]

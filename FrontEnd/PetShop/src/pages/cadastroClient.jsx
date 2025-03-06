@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function cadastroClient() {
   const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ function cadastroClient() {
   }
 
   const redirect = () => {
-    navigate("/");
+    navigate("/Login");
   };
 
   return (
@@ -42,7 +42,7 @@ function cadastroClient() {
         onSubmit={handleSubmit}
         className="flex items-center justify-center"
       >
-        <div className="flex min-h-full w-[50%] flex-col justify-center px-6 py-12 lg:px-8 ">
+        <div className="flex max-h-full w-screen sm:w-[75%] md:w-[50%] transition-all duration-200 ease-linear flex-col justify-center px-6 py-12 lg:px-8">
           <h2 className="text-base/7 font-semibold text-gray-900">
             Informações pessoais para cadastro
           </h2>
@@ -302,6 +302,9 @@ function cadastroClient() {
                 />
               </div>
             </div>
+            <article className="sm:col-span-full mt-0 text-blue-400 font-normal text-end">
+              <Link to="/Login">Já tem cadastro, faça login aqui.</Link>
+            </article>
             {error && (
               <div className="sm:col-span-full">
                 <span

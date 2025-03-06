@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [selected, setSelected] = useState("");
@@ -16,12 +17,12 @@ function Register() {
   return (
     <>
       <form method="post" className="flex items-center justify-center max-w-full">
-        <div className="flex max-h-full w-[50%] flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex max-h-full w-screen sm:w-[75%] md:w-[50%] transition-all duration-200 ease-linear flex-col justify-center px-6 py-12 lg:px-8">
           <h2 className="text-base/7 font-semibold text-gray-900">
-            Register your Pet
+            <span className="capitalize">registre</span> seu pet
           </h2>
           <p className="mt-1 text-sm/6 text-gray-600">
-            Use a permanent address where you can receive mail.
+            <span className="capitalize">Use</span> um endereço permanente onde você possa receber correspondência.
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -196,7 +197,9 @@ function Register() {
               type="button"
               className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Cancelar
+              <Link to="/">
+                Cancelar
+              </Link>
             </button>
             <button
               type="submit"

@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Contato = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    assunto: "",
+    messagem: "",
+  }) 
+  
+  const handleFormEdit = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    })
+    console.log(formData)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formData)
+  }
+
   return (
-    <section className="bg-white">
-      <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+    <section className="overflow-hidden min-h-[calc(100vh-120px)]">
+      <div className="mt-8 py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 ">
           Contate-nos
         </h2>
@@ -11,7 +30,7 @@ const Contato = () => {
           Tem um problema técnico? Quer enviar feedback sobre um recurso beta?
           Precisa de detalhes sobre nosso plano Business? Nos avise.
         </p>
-        <form action="#" className="space-y-8">
+        <form onSubmit={handleSubmit} metho="POST" className="space-y-8">
           <div>
             <label
               for="email"
@@ -21,6 +40,9 @@ const Contato = () => {
             </label>
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleFormEdit}
               id="email"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg outline-none block w-full p-2.5"
               placeholder="name@gmail.com"
@@ -36,7 +58,10 @@ const Contato = () => {
             </label>
             <input
               type="text"
-              id="subject"
+              name="assunto"
+              // value={formData.assunto}
+              onChange={handleFormEdit}
+              id="assunto"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg outline-none block w-full p-2.5"
               placeholder="Deixe-nos saber como podemos ajudá-lo"
               required
@@ -50,7 +75,10 @@ const Contato = () => {
               <span className="capitalize">Sua</span> mensagem
             </label>
             <textarea
-              id="message"
+              id="messagem"
+              name="messagem"
+              value={formData.messagem}
+              onChange={handleFormEdit}
               rows="6"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300"
               placeholder="Deixe um comentário..."

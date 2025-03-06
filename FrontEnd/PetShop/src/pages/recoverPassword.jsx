@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const RecoverPassword = () => {
     const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ const RecoverPassword = () => {
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
           <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Recuperar Senha</h2>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+            <div className="mb-4 flex flex-col ">
               <label htmlFor="email" className="block text-sm font-medium text-gray-600">E-mail</label>
               <input
                 type="email"
@@ -31,9 +32,18 @@ const RecoverPassword = () => {
             </div>
             <button
               type="submit"
-              className="w-full p-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
             >
               Enviar Instruções
+            </button>
+            <button
+              className="w-full p-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+            >
+              <Link
+                to="/Login"
+              >
+                voltar
+              </Link> 
             </button>
           </form>
           {message && (

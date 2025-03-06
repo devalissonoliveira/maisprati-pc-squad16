@@ -69,14 +69,6 @@ public record SubscriptionDTO(
         sub.setCancellationReason(subscription.cancellationReason());
         return sub;
     }
-    public static Subscription toModel(SubscriptionDTO subscription, Function< Long, User> userFunction, Function<Long, Plan> planFunction) {
-        Subscription sub = toModel(subscription);
-        var user = userFunction.apply(subscription.userId);
-        var plan = planFunction.apply(subscription.planId);
-        sub.setUser(user);
-        sub.setPlan(plan);
-        return sub;
-    }
     public static Subscription toModel(SubscriptionDTO subscription, User user, Plan plan) {
         Subscription sub = toModel(subscription);
         sub.setUser(user);

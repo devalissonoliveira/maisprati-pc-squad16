@@ -6,6 +6,7 @@ import com.br.maisprati.squad16.EncontreMeuPet.application.services.TokenService
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.ProfileDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.dtos.SubscriptionDTO;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.Roles;
+import com.br.maisprati.squad16.EncontreMeuPet.domain.enums.SubscriptionStatus;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.Address;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.City;
 import com.br.maisprati.squad16.EncontreMeuPet.domain.models.State;
@@ -77,14 +78,23 @@ public class AuthorizationController {
     @GetMapping("/profile")
     public ResponseEntity<ProfileDTO> profile() {
         var user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        var subs = this.subscriptionRepository.findByUserAndEndDateIsNull(user);
-        var subscription = subs.orElseGet(null);
-        var subscriptionDTO = subs == null ? null : SubscriptionDTO.toDTO(subscription);
-        var profile = new ProfileDTO(
-                user.getName(),
-                user.getEmail(),
-                subscriptionDTO
-        );
+        var subs = this.subscriptionRepository.findByUserAndStatusEquals(user, SubscriptionStatus.ACTIVE);
+        ProfileDTO profile = null;
+        if(subs.isPresent()){
+            var subscription = subs.get();
+            var subscriptionDTO = SubscriptionDTO.toDTO(subscription);
+            profile = new ProfileDTO(
+                    user.getName(),
+                    user.getEmail(),
+                    subscriptionDTO
+            );
+        } else {
+            profile = new ProfileDTO(
+                    user.getName(),
+                    user.getEmail(),
+                    null
+            );
+        }
         return ResponseEntity.ok(profile);
     }
     @PostMapping("/register")

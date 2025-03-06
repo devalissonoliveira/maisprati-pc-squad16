@@ -52,8 +52,8 @@ export function AuthProvider(props) {
         })
         const token = data.accessToken;
         setByKey('token', token);
+        await loadProfile();
         setToken(token)
-        loadProfile()
         return token;
     }
     const logout = () => {

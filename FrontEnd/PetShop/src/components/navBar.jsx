@@ -11,7 +11,7 @@ function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuProfileOpen, setIsMenuProfileOpen] = useState(false);
   const [isUserLogged, setIsUserLogged] = useState(true)
-  const { logout, login, token } = useAuthentication()
+  const { logout, profile , token } = useAuthentication()
   const navigate = useNavigate()
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
@@ -37,11 +37,14 @@ function NavBar() {
     { name: "Cadastro do Pet", href: "/PetRegistration", current: false },
     { name: "Contatos", href: "/Contato", current: false },
   ];
-
+  const loginRoute = [
+    { name: "Meus Pets", href: '/animais'  }
+  ];
   const userNavigation = [
     { name: "Perfil", href: "#" },
     token ? { name: "Logout", href: '#', onClick: logout  } : { name: "Log in", href: '/Login', onClick: () =>  navigate('/Login') },
   ];
+  if(token) userNavigation.push(...loginRoute)
 
   return (
     <>
@@ -57,6 +60,7 @@ function NavBar() {
                     className="size-16"
                   />
                 </div>
+                
               </div>
               {/* LINKS ESPANDIDOS DO NAV */}
               <div className="hidden md:block">
@@ -103,6 +107,7 @@ function NavBar() {
                           className="size-8 rounded-full cursor-pointer"
                         />
                       </div>
+                      <p className="text-md text-white">{profile && profile.name && profile.name.split(' ')[0]}</p>
                     </div>
                     ) :
                     ( <button

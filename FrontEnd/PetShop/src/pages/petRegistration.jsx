@@ -94,7 +94,7 @@ function Register() {
           <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-full">
               <label
-                for="name"
+                htmlFor="name"
                 className="block font-medium text-gray-900 text-start text-sm/6"
               >
                 <span className="capitalize">Nome</span> do pet
@@ -120,7 +120,7 @@ function Register() {
 
             <div className="sm:col-span-full">
               <label
-                for="breed"
+                htmlFor="breed"
                 className="block font-medium text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 Raça
@@ -140,7 +140,7 @@ function Register() {
             </div>
             <div className="sm:col-span-full">
               <label
-                for="species"
+                htmlFor="species"
                 className="block font-medium text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 species
@@ -161,7 +161,7 @@ function Register() {
 
             <div className="sm:col-span-4">
               <label
-                for="idade"
+                htmlFor="idade"
                 className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 idade
@@ -183,7 +183,7 @@ function Register() {
             <div className="sm:col-span-2 ">
               <div className="items-center hidden">
                 <label
-                  for="pedigre"
+                  htmlFor="pedigre"
                   className="block font-medium text-gray-900 capitalize text-sm/6"
                 >
                   pedigre
@@ -192,7 +192,7 @@ function Register() {
               <div className="flex flex-grow gap-6 mt-2 max-sm:justify-center">
                 <div className="flex flex-row items-center gap-1">
                   <label
-                    for="yes"
+                    htmlFor="yes"
                     className="block font-medium text-gray-900 capitalize text-sm/6"
                   >
                     yes
@@ -209,7 +209,7 @@ function Register() {
                 </div>
                 <div className="flex flex-row items-center gap-1">
                   <label
-                    for="no"
+                    htmlFor="no"
                     className="block font-medium text-gray-900 capitalize text-sm/6"
                   >
                     no
@@ -231,7 +231,7 @@ function Register() {
               <div className="flex gap-6 sm:col-span-full">
                 <label
                   id="anexar-file"
-                  for="pedgre"
+                  htmlFor="pedgre"
                   className="flex w-40 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 capitalize hover:cursor-pointer"
                 >
                   anexar arquivo
@@ -251,7 +251,7 @@ function Register() {
 
             <div className="col-span-full">
               <label
-                for="observation"
+                htmlFor="observation"
                 className="block font-medium text-gray-900 capitalize text-start text-sm/6"
               >
                 observações

@@ -33,7 +33,7 @@ const Contato = () => {
         <form onSubmit={handleSubmit} metho="POST" className="space-y-8">
           <div>
             <label
-              for="email"
+              htmlFor="email"
               className="block mb-2 text-sm font-medium text-black capitalize"
             >
               Seu Email
@@ -51,7 +51,7 @@ const Contato = () => {
           </div>
           <div>
             <label
-              for="subject"
+              htmlFor="subject"
               className="block mb-2 text-sm font-medium text-black capitalize"
             >
               Assunto
@@ -69,7 +69,7 @@ const Contato = () => {
           </div>
           <div className="sm:col-span-2">
             <label
-              for="message"
+              htmlFor="message"
               className="block mb-2 text-sm font-medium text-black"
             >
               <span className="capitalize">Sua</span> mensagem

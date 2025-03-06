@@ -109,7 +109,7 @@ function cadastroClient() {
           <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                for="first-name"
+                htmlFor="first-name"
                 className="block font-medium text-gray-900 text-sm/6"
               >
                 Primeiro nome
@@ -131,7 +131,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-3">
               <label
-                for="last-name"
+                htmlFor="last-name"
                 className="block font-medium text-gray-900 text-sm/6"
               >
                 Último nome
@@ -152,7 +152,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-full">
               <label
-                for="email"
+                htmlFor="email"
                 className="block font-medium text-gray-900 text-sm/6"
               >
                 Endereço Email
@@ -172,7 +172,7 @@ function cadastroClient() {
             {errors.email && (
               <div className="sm:col-span-full">
                 <span
-                  for="city"
+                  htmlFor="city"
                   className="block font-medium text-red-900 text-sm/6"
                 >
                   {errors.email}
@@ -184,7 +184,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-4">
               <label
-                for="email"
+                htmlFor="email"
                 className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start "
               >
                 Endereço
@@ -203,7 +203,7 @@ function cadastroClient() {
             </div>
             <div className="sm:col-span-2">
               <label
-                for="email"
+                htmlFor="email"
                 className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 número
@@ -225,7 +225,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-4">
               <label
-                for="email"
+                htmlFor="email"
                 className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start "
               >
                 bairro
@@ -244,7 +244,7 @@ function cadastroClient() {
             </div>
             <div className="sm:col-span-2">
               <label
-                for="email"
+                htmlFor="email"
                 className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 cep
@@ -264,7 +264,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-4">
               <label
-                for="email"
+                htmlFor="email"
                 className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start "
               >
                 cidade
@@ -283,7 +283,7 @@ function cadastroClient() {
             </div>
             <div className="sm:col-span-2">
               <label
-                for="email"
+                htmlFor="email"
                 className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 estado
@@ -303,7 +303,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-3">
               <label
-                for="first-name"
+                htmlFor="first-name"
                 className="block font-medium text-gray-900 text-sm/6"
               >
                 <span className="capitalize">primeiro</span> telefone
@@ -323,7 +323,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-3">
               <label
-                for="last-name"
+                htmlFor="last-name"
                 className="block font-medium text-gray-900 text-sm/6"
               >
                 <span className="capitalize">segundo</span> telefone
@@ -341,7 +341,7 @@ function cadastroClient() {
 
             <div className="col-span-full">
               <label
-                for="street-address"
+                htmlFor="street-address"
                 className="block font-medium text-gray-900 capitalize text-sm/6"
               >
                 senha
@@ -364,7 +364,7 @@ function cadastroClient() {
 
             <div className="sm:col-span-full ">
               <label
-                for="city"
+                htmlFor="city"
                 className="block font-medium text-gray-900 text-sm/6"
               >
                 <span>confirmação</span> da senha
@@ -389,7 +389,7 @@ function cadastroClient() {
             {error && (
               <div className="sm:col-span-full">
                 <span
-                  for="city"
+                  htmlFor="city"
                   className="block font-medium text-red-900 text-sm/6"
                 >
                   {error}

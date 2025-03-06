@@ -43,7 +43,9 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<PetDTO> all() {
-        return this.petRepository.findAll().stream().map(PetDTO::toDTO).collect(Collectors.toList());
+        return this.petRepository.findAllByUser(
+            (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
+        ).stream().map(PetDTO::toDTO).collect(Collectors.toList());
     }
 
     @Override

@@ -1,14 +1,80 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { useAuthenticatedApi } from "../context/AuthContext";
+import { isAxiosError } from "axios";
+import { useAlert } from "../context/AlertContext";
+const terms = {
+  'DOG': 'Cachorro',
+  'OTHERS': 'Outros',
+  'CAT': 'Gato',
+  'PARROT': 'Papagaio',
+  'HAMSTER': 'Hamster'
+}
 function Register() {
   const [selected, setSelected] = useState("");
+  const { api } = useAuthenticatedApi()
+  const { showAlert } = useAlert()
+  const [errors, setErrors] = useState({
+    name: null,
+    species: null,
+    breed: null,
+    age: 0,
+    observations: null,
+    registrationDate: null,
+    active: true
+  })
+  const [form, setForm] = useState(
+    {
+      name: null,
+      species: 'DOG',
+      breed: null,
+      age: 0,
+      observations: null,
+      registrationDate: null,
+      active: true
+    })
+  function setFormField(field, value) {
+    setForm(form => ({ ...form, [field]: value }))
+  }
   const [file, setFile] = useState(null);
 
   const handleCheckboxChange = (option) => {
     setSelected(option); // Desmarca se já estiver selecionado
   };
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await api.post('/pets', form);
+      setForm({
+        name: null,
+        species: 'DOG',
+        breed: null,
+        age: 0,
+        observations: null,
+        registrationDate: null,
+        active: true
+      })
+      showAlert('Criado com sucesso')
+    } catch (e) {
+      if (!isAxiosError(e)) {
+        return showAlert('Não foi possível cadastrar o pet', 'error')
+      }
+      if (e.response) {
+        switch (e.response.status) {
+          case 400:
+            e.response.data?.forEach(error => {
+              setErrors(errors => ({ ...errors, [error.field]: error.defaultMessage }))
+            })
+            break;
+          case 422:
+            showAlert(e.response.data.message, 'error')
+            break;
+          default:
+            showAlert('Não foi possível cadastrar o pet', 'error')
+        }
+      }
+    }
+  }
   function handleAddfile(event) {
     const selectedFile = event.target.value;
     setFile(selectedFile);
@@ -16,20 +82,20 @@ function Register() {
   }
   return (
     <>
-      <form method="post" className="flex items-center justify-center max-w-full">
+      <form method="post" onSubmit={handleSubmit} className="flex items-center justify-center max-w-full">
         <div className="flex max-h-full w-screen sm:w-[75%] md:w-[50%] transition-all duration-200 ease-linear flex-col justify-center px-6 py-12 lg:px-8">
-          <h2 className="text-base/7 font-semibold text-gray-900">
+          <h2 className="font-semibold text-gray-900 text-base/7">
             <span className="capitalize">registre</span> seu pet
           </h2>
-          <p className="mt-1 text-sm/6 text-gray-600">
+          <p className="mt-1 text-gray-600 text-sm/6">
             <span className="capitalize">Use</span> um endereço permanente onde você possa receber correspondência.
           </p>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-full">
               <label
                 for="name"
-                className="text-start block text-sm/6 font-medium text-gray-900"
+                className="block font-medium text-gray-900 text-start text-sm/6"
               >
                 <span className="capitalize">Nome</span> do pet
               </label>
@@ -42,6 +108,7 @@ function Register() {
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
+              <p class="text-sm text-red-600 mt-2"  >{errors.name}</p>
             </div>
 
             {/* Email address */}
@@ -49,7 +116,7 @@ function Register() {
             <div className="sm:col-span-full">
               <label
                 for="email"
-                className="block text-sm/6 font-medium text-gray-900 capitalize sm:text-start text-center"
+                className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 <span className="capitalize">email</span> address
               </label>
@@ -68,7 +135,7 @@ function Register() {
             <div className="sm:col-span-full">
               <label
                 for="race"
-                className="block text-sm/6 font-medium text-gray-900 capitalize sm:text-start"
+                className="block font-medium text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 race
               </label>
@@ -82,11 +149,28 @@ function Register() {
                 />
               </div>
             </div>
+            <div className="sm:col-span-full">
+              <label
+                for="race"
+                className="block font-medium text-gray-900 capitalize text-sm/6 sm:text-start"
+              >
+                race
+              </label>
+              <div className="mt-2">
+                <select
+                  name="species"
+                  placeholder="Shih tzu, Pastor Alemão..."
+                  class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                >
+                  {Object.entries(terms).map(([key, value]) => <option value={key}>{value}</option>)}
+                </select>
+              </div>
+            </div>
 
             <div className="sm:col-span-4">
               <label
                 for="idade"
-                className="block text-sm/6 font-medium text-gray-900 sm:text-start text-center capitalize"
+                className="block font-medium text-center text-gray-900 capitalize text-sm/6 sm:text-start"
               >
                 idade
               </label>
@@ -105,7 +189,7 @@ function Register() {
               <div className="items-center">
                 <label
                   for="pedigre"
-                  className="block text-sm/6 font-medium text-gray-900 capitalize"
+                  className="block font-medium text-gray-900 capitalize text-sm/6"
                 >
                   pedigre
                 </label>
@@ -114,7 +198,7 @@ function Register() {
                 <div className="flex flex-row items-center gap-1">
                   <label
                     for="yes"
-                    className="block text-sm/6 font-medium text-gray-900 capitalize"
+                    className="block font-medium text-gray-900 capitalize text-sm/6"
                   >
                     yes
                   </label>
@@ -125,13 +209,13 @@ function Register() {
                     placeholder="Shih tzu, Pastor Alemão..."
                     checked={selected === "yes"}
                     onChange={() => handleCheckboxChange("yes")}
-                    // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
                 <div className="flex flex-row items-center gap-1">
                   <label
                     for="no"
-                    className="block text-sm/6 font-medium text-gray-900 capitalize"
+                    className="block font-medium text-gray-900 capitalize text-sm/6"
                   >
                     no
                   </label>
@@ -142,7 +226,7 @@ function Register() {
                     placeholder="Shih tzu, Pastor Alemão..."
                     checked={selected === "no"}
                     onChange={() => handleCheckboxChange("no")}
-                    // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  // className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
               </div>
@@ -173,11 +257,11 @@ function Register() {
             <div className="col-span-full">
               <label
                 for="observation"
-                className="text-start block text-sm/6 font-medium text-gray-900 capitalize"
+                className="block font-medium text-gray-900 capitalize text-start text-sm/6"
               >
                 observações
               </label>
-              <p className="text-start text-gray-400 text-xs">
+              <p className="text-xs text-gray-400 text-start">
                 <span className="capitalize">máximo</span> de 512 palavras.
               </p>
               <div className="mt-2">
@@ -192,10 +276,10 @@ function Register() {
               </div>
             </div>
           </div>
-          <div className="mt-6 flex items-center justify-end gap-x-6 col-span-full">
+          <div className="flex items-center justify-end mt-6 gap-x-6 col-span-full">
             <button
               type="button"
-              className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="px-3 py-2 text-sm font-semibold text-white bg-red-600 rounded-md shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               <Link to="/">
                 Cancelar
@@ -203,7 +287,7 @@ function Register() {
             </button>
             <button
               type="submit"
-              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Salvar
             </button>

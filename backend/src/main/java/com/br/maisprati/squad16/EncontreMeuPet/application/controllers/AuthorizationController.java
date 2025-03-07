@@ -86,12 +86,14 @@ public class AuthorizationController {
             profile = new ProfileDTO(
                     user.getName(),
                     user.getEmail(),
+                    user.getRole(),
                     subscriptionDTO
             );
         } else {
             profile = new ProfileDTO(
                     user.getName(),
                     user.getEmail(),
+                    user.getRole(),
                     null
             );
         }

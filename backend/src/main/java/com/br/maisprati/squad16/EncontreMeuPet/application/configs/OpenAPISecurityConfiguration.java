@@ -23,7 +23,20 @@ import org.springframework.context.annotation.Configuration;
                 ),
                 termsOfService = "${tos.uri}",
                 description = "${api.description}"
-        )
+        ),
+        servers = {
+
+                @Server(
+                        url = "/",
+                        description = "Test Server"
+                ),
+                @Server(
+                        url = "https://api.yuresamarone.shop",
+                        description = "Production Server"
+                )
+
+
+        }
 )
 @SecurityScheme(
         name = "Bearer Authentication",
@@ -32,16 +45,6 @@ import org.springframework.context.annotation.Configuration;
         scheme = "bearer"
 
 )
-@Servers({
-        @Server(
-                url = "https://api.yuresamarone.shop",
-                description = "Production Server"
-        )
-        ,
-        @Server(
-                url = "http://localhost:8080",
-                description = "Teste Server"
-        )
-})
+
 public class OpenAPISecurityConfiguration {
 }

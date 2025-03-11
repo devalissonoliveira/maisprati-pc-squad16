@@ -6,11 +6,13 @@ WORKDIR /app
 
 # Copia os arquivos de build do Gradle (build.gradle, settings.gradle, etc.)
 COPY build.gradle .
+COPY gradle ./gradle 
+COPY ./gradlew gradlew
 COPY settings.gradle .
 COPY src ./src
 
 # Baixa as dependências e constrói o projeto (ignorando os testes)
-RUN gradle build -x test
+RUN ./gradlew build -x test --no-daemon
 
 # Etapa de execução: usa uma imagem leve do OpenJDK para rodar a aplicação
 FROM openjdk:17-jdk-alpine

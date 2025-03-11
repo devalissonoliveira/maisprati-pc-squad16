@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import useApi from '../utils/api'
-import { isAxiosError } from 'axios'
-import { useAlert } from '../context/AlertContext';
-import { useAuthentication } from '../context/AuthContext'
+import useApi from "../utils/api";
+import axios, { isAxiosError } from "axios";
+import { useAlert } from "../context/AlertContext";
+import { useAuthentication } from "../context/AuthContext";
 function cadastroClient() {
-  const { api } = useApi()
-  const { showAlert } = useAlert()
+  const { api } = useApi();
+  const { showAlert } = useAlert();
   const [errors, setErrors] = useState({
     name: null,
     email: null,
@@ -22,19 +22,18 @@ function cadastroClient() {
   });
   const [form, setForm] = useState({
     firstName: "",
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-    street: '',
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    street: "",
     number: "",
     neighborhood: "",
     postalCode: "",
     city: "",
     state: "",
-
-  })
+  });
   const { login } = useAuthentication();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -44,7 +43,25 @@ function cadastroClient() {
   const navigate = useNavigate();
 
   function setFormField(field, value) {
-    setForm(fields => ({ ...fields, [field]: value }))
+    setForm((fields) => ({ ...fields, [field]: value }));
+    if (field === 'postalCode' && value.length === 8) {
+      handleCep(value);
+    }
+  }
+
+  async function handleCep(value) {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${value}/json/`);
+      setForm((prevForm) => ({
+        ...prevForm,
+        street: response.data.logradouro || '',
+        neighborhood: response.data.bairro || '',
+        city: response.data.localidade || '',
+        state: response.data.uf || ''
+      }));
+    } catch (error) {
+      showAlert('Erro ao buscar o endereço:', error);
+    }
   }
 
   function handleSubmit(e) {
@@ -55,35 +72,38 @@ function cadastroClient() {
       form.confirmPassword != "" &&
       form.password === form.confirmPassword
     ) {
-      form.name = `${form.firstName.trim()} ${form.lastName.trim()}`
+      form.name = `${form.firstName.trim()} ${form.lastName.trim()}`;
       setError(""); // Limpa erros anteriores
-      api.post('/register', form)
+      api
+        .post("/register", form)
         .then(() => {
-          login(form.email, form.password)
-            .then(() => {
-              showAlert('Conta criada com sucesso!')
-              navigate('/animais')
-            })
+          login(form.email, form.password).then(() => {
+            showAlert("Conta criada com sucesso!");
+            navigate("/animais");
+          });
         })
-        .catch(e => {
+        .catch((e) => {
           if (isAxiosError(e)) {
             if (e.response?.status == 400) {
-              console.log(e.response.data)
-              e.response.data.forEach(error => {
-                setErrors(errors => ({
+              console.log(e.response.data);
+              e.response.data.forEach((error) => {
+                setErrors((errors) => ({
                   ...errors,
-                  [error.field]: error.defaultMessage
-                }))
-              })
+                  [error.field]: error.defaultMessage,
+                }));
+              });
             } else if (e.response?.status == 422) {
-              showAlert(e.response.data.message, 'error')
+              showAlert(e.response.data.message, "error");
             } else {
-              showAlert('Falha ao tentar criar uma conta', 'error')
+              showAlert("Falha ao tentar criar uma conta", "error");
             }
           }
-        })
+        });
     } else {
-      setErrors(errors => ({ ...errors, confirmPassword: 'As senhas não coincidem' }))
+      setErrors((errors) => ({
+        ...errors,
+        confirmPassword: "As senhas não coincidem",
+      }));
     }
   }
 
@@ -118,15 +138,14 @@ function cadastroClient() {
                 <input
                   type="text"
                   name="first-name"
-                  onChange={e => setFormField('firstName', e.target.value)}
+                  onChange={(e) => setFormField("firstName", e.target.value)}
                   value={form.firstName}
                   id="first-name"
                   placeholder="Primeiro name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
-
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.name}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.name}</p>
             </div>
 
             <div className="sm:col-span-3">
@@ -143,11 +162,11 @@ function cadastroClient() {
                   id="last-name"
                   placeholder="Ultimo name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  onChange={e => setFormField('lastName', e.target.value)}
+                  onChange={(e) => setFormField("lastName", e.target.value)}
                   value={form.lastName}
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.name}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.name}</p>
             </div>
 
             <div className="sm:col-span-full">
@@ -164,7 +183,7 @@ function cadastroClient() {
                   type="email"
                   value={form.email}
                   placeholder="Seu Email aqui."
-                  onChange={(e) => setFormField('email', e.target.value)}
+                  onChange={(e) => setFormField("email", e.target.value)}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -194,12 +213,12 @@ function cadastroClient() {
                   name="email"
                   type="text"
                   value={form.street}
-                  onChange={e => setFormField('street', e.target.value)}
+                  onChange={(e) => setFormField("street", e.target.value)}
                   placeholder="Endereço"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.street}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.street}</p>
             </div>
             <div className="sm:col-span-2">
               <label
@@ -211,7 +230,7 @@ function cadastroClient() {
               <div className="mt-2">
                 <input
                   id="email"
-                  onChange={e => setFormField('number', e.target.value)}
+                  onChange={(e) => setFormField("number", e.target.value)}
                   value={form.number}
                   name="email"
                   type="text"
@@ -219,7 +238,7 @@ function cadastroClient() {
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.number}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.number}</p>
             </div>
             {/* ENDEREÇO */}
 
@@ -233,14 +252,14 @@ function cadastroClient() {
               <div className="mt-2">
                 <input
                   value={form.neighborhood}
-                  onChange={e => setFormField('neighborhood', e.target.value)}
+                  onChange={(e) => setFormField("neighborhood", e.target.value)}
                   name="email"
                   type="text"
                   placeholder="Bairro"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.neighborhood}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.neighborhood}</p>
             </div>
             <div className="sm:col-span-2">
               <label
@@ -252,14 +271,16 @@ function cadastroClient() {
               <div className="mt-2">
                 <input
                   value={form.postalCode}
-                  onChange={e => setFormField('postalCode', e.target.value)}
+                  onChange={(e) => {
+                    setFormField("postalCode", e.target.value);
+                  }}
                   name="email"
                   type="text"
                   placeholder="Cep da sua casa"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.postalCode}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.postalCode}</p>
             </div>
 
             <div className="sm:col-span-4">
@@ -272,14 +293,14 @@ function cadastroClient() {
               <div className="mt-2">
                 <input
                   value={form.city}
-                  onChange={e => setFormField('city', e.target.value)}
+                  onChange={(e) => setFormField("city", e.target.value)}
                   name="email"
                   type="text"
                   placeholder="Cidade"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.city}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.city}</p>
             </div>
             <div className="sm:col-span-2">
               <label
@@ -291,14 +312,14 @@ function cadastroClient() {
               <div className="mt-2">
                 <input
                   value={form.state}
-                  onChange={e => setFormField('state', e.target.value)}
+                  onChange={(e) => setFormField("state", e.target.value)}
                   name="email"
                   type="text"
                   placeholder="Estado"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.state}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.state}</p>
             </div>
 
             <div className="sm:col-span-3">
@@ -313,12 +334,12 @@ function cadastroClient() {
                   type="text"
                   name="first-name"
                   value={form.phone}
-                  onChange={e => setFormField('phone', e.target.value)}
+                  onChange={(e) => setFormField("phone", e.target.value)}
                   placeholder="Primeiro numero"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.phone}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.phone}</p>
             </div>
 
             <div className="sm:col-span-3">
@@ -352,14 +373,14 @@ function cadastroClient() {
                   name="street-address"
                   id="street-address"
                   onChange={(e) => {
-                    setFormField('password', e.target.value);
+                    setFormField("password", e.target.value);
                   }}
                   value={form.password}
                   placeholder="Senha"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.password}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.password}</p>
             </div>
 
             <div className="sm:col-span-full ">
@@ -375,13 +396,13 @@ function cadastroClient() {
                   name="city"
                   value={form.confirmPassword}
                   onChange={(e) => {
-                    setFormField('confirmPassword', e.target.value);
+                    setFormField("confirmPassword", e.target.value);
                   }}
                   placeholder="Confirme sua Senha"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
-              <p class="text-sm text-red-600 mt-2"  >{errors.confirmPassword}</p>
+              <p class="text-sm text-red-600 mt-2">{errors.confirmPassword}</p>
             </div>
             <article className="mt-0 font-normal text-blue-400 sm:col-span-full text-end">
               <Link to="/Login">Já tem cadastro, faça login aqui.</Link>

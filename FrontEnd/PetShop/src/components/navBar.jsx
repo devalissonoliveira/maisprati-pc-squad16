@@ -54,11 +54,13 @@ function NavBar() {
             <div className="flex h-16 items-center justify-between">
               <div className="flex items-cente justify-between">
                 <div className="shrink-0">
-                  <img
-                    alt="Your Company"
-                    src={MeuPet}
-                    className="size-16"
-                  />
+                  <Link to="/">
+                    <img
+                      alt="Your Company"
+                      src={MeuPet}
+                      className="size-16"
+                    />
+                  </Link>
                 </div>
                 
               </div>

@@ -1,22 +1,6 @@
-# Etapa de build: usa uma imagem do Gradle para compilar a aplicação
-FROM gradle:8.11.1-jdk17 AS build
-
-# Define o diretório de trabalho dentro do contêiner
-WORKDIR /app
-
-# Copia os arquivos de build do Gradle (build.gradle, settings.gradle, etc.)
-COPY build.gradle .
-COPY gradle ./gradle 
-COPY ./gradlew gradlew
-COPY settings.gradle .
-COPY src ./src
-
-# Baixa as dependências e constrói o projeto (ignorando os testes)
-RUN gradle build -x test --no-daemon --stacktrace
-
 # Etapa de execução: usa uma imagem leve do OpenJDK para rodar a aplicação
 FROM openjdk:17-jdk-alpine
-
+COPY . .
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
 

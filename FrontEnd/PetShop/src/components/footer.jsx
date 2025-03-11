@@ -15,7 +15,7 @@ const Footer = () => {
           </a>
           <a>
             <span className="capitalize"> politica</span> de{" "}
-            <span className="capitalize">privacdade</span>
+            <span className="capitalize">privacidade</span>
           </a>
         </p>
       </footer>

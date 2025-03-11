@@ -24,7 +24,7 @@ export default function ListPets() {
             })
     }, []);
     return (
-        <div className="flex flex-col my-4">
+        <div className="bg-yellow-400 h-[calc(100vh-152px)] flex flex-col my-4">
             <div className="-m-1.5 overflow-x-auto">
                 <div className="p-1.5 min-w-full inline-block align-middle">
                     <div className="overflow-hidden">

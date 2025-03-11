@@ -151,7 +151,8 @@ function Register() {
                   value={form.species}
                   onChange={e => setFormField('species', e.target.value)}
                   placeholder="Shih tzu, Pastor Alemão..."
-                  className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                  // className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                  className="block w-full rounded-md bg-white h-3 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 >
                   {Object.entries(terms).map(([key, value]) => <option value={key}>{value}</option>)}
                 </select>

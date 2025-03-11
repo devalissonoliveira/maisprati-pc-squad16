@@ -121,7 +121,7 @@ function cadastroClient() {
                   onChange={e => setFormField('firstName', e.target.value)}
                   value={form.firstName}
                   id="first-name"
-                  placeholder="First name"
+                  placeholder="Primeiro name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
 
@@ -141,7 +141,7 @@ function cadastroClient() {
                   type="text"
                   name="last-name"
                   id="last-name"
-                  placeholder="Last name"
+                  placeholder="Ultimo name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   onChange={e => setFormField('lastName', e.target.value)}
                   value={form.lastName}
@@ -163,7 +163,7 @@ function cadastroClient() {
                   name="email"
                   type="email"
                   value={form.email}
-                  placeholder="Your Email is here."
+                  placeholder="Seu Email aqui."
                   onChange={(e) => setFormField('email', e.target.value)}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -195,7 +195,7 @@ function cadastroClient() {
                   type="text"
                   value={form.street}
                   onChange={e => setFormField('street', e.target.value)}
-                  placeholder="Address"
+                  placeholder="Endereço"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -215,7 +215,7 @@ function cadastroClient() {
                   value={form.number}
                   name="email"
                   type="text"
-                  placeholder="Number your Address"
+                  placeholder="Número do seu endereço"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -255,7 +255,7 @@ function cadastroClient() {
                   onChange={e => setFormField('postalCode', e.target.value)}
                   name="email"
                   type="text"
-                  placeholder="Cep of your home"
+                  placeholder="Cep da sua casa"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -275,7 +275,7 @@ function cadastroClient() {
                   onChange={e => setFormField('city', e.target.value)}
                   name="email"
                   type="text"
-                  placeholder="Cit"
+                  placeholder="Cidade"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -294,7 +294,7 @@ function cadastroClient() {
                   onChange={e => setFormField('state', e.target.value)}
                   name="email"
                   type="text"
-                  placeholder="Estate"
+                  placeholder="Estado"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -355,7 +355,7 @@ function cadastroClient() {
                     setFormField('password', e.target.value);
                   }}
                   value={form.password}
-                  placeholder="password"
+                  placeholder="Senha"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -377,8 +377,8 @@ function cadastroClient() {
                   onChange={(e) => {
                     setFormField('confirmPassword', e.target.value);
                   }}
-                  placeholder="Confirme password"
-                  className={`block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6`}
+                  placeholder="Confirme sua Senha"
+                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
               <p class="text-sm text-red-600 mt-2"  >{errors.confirmPassword}</p>

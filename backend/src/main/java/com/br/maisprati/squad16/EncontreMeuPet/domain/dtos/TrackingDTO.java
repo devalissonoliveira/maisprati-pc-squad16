@@ -14,7 +14,6 @@ public record TrackingDTO(
         BigDecimal latitude,
         BigDecimal longitude,
         String device,
-        String ipAddress,
         String contactInfo,
         TrackingStatus status) {
 
@@ -28,7 +27,6 @@ public record TrackingDTO(
                 tracking.getLatitude(),
                 tracking.getLongitude(),
                 tracking.getDevice(),
-                tracking.getIpAddress(),
                 tracking.getContactInfo(),
                 tracking.getStatus()
         );

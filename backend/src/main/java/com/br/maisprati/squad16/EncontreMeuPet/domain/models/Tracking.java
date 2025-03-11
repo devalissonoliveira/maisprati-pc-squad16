@@ -40,9 +40,6 @@ public class Tracking {
     @Column(name = "device", length = 255)
     private String device;
 
-    @Column(name = "ip_address", length = 45)
-    private String ipAddress;
-
     @Column(name = "contact_info", columnDefinition = "TEXT")
     private String contactInfo;
 
@@ -101,14 +98,6 @@ public class Tracking {
         this.device = device;
     }
 
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
-
     public String getContactInfo() {
         return contactInfo;
     }
@@ -153,7 +142,6 @@ public class Tracking {
                 + ", latitude=" + latitude
                 + ", longitude=" + longitude
                 + ", device='" + device + '\''
-                + ", ipAddress='" + ipAddress + '\''
                 + ", status=" + status
                 + '}';
     }

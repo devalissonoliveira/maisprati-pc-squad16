@@ -71,22 +71,7 @@ public class PublicTrackingController {
         tracking.setQrCode(qrCode);
         tracking.setScanDate(LocalDateTime.now());
         tracking.setDevice(request.getHeader("User-Agent"));
-        tracking.setIpAddress(getClientIpAddress(request));
         tracking.setStatus(TrackingStatus.VIEWED);
         return trackingRepository.save(tracking);
-    }
-
-    private String getClientIpAddress(HttpServletRequest request) {
-        String ipAddress = request.getHeader("X-Forwarded-For");
-        if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("Proxy-Client-IP");
-        }
-        if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getRemoteAddr();
-        }
-        return ipAddress;
     }
 }

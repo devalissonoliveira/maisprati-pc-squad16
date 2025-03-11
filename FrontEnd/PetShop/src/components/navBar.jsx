@@ -1,7 +1,7 @@
 import React from "react";
-import MeuPet from "../assets/Enconte_meu_Pet.png"
+import MeuPet from "../assets/Enconte_meu_Pet.png";
 import { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegBell } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
@@ -10,12 +10,14 @@ import { useAuthentication } from "../context/AuthContext";
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuProfileOpen, setIsMenuProfileOpen] = useState(false);
-  const [isUserLogged, setIsUserLogged] = useState(true)
-  const { logout, profile , token } = useAuthentication()
-  const navigate = useNavigate()
+  const [isUserLogged, setIsUserLogged] = useState(true);
+  const { logout, profile, token } = useAuthentication();
+  const navigate = useNavigate();
+  
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
   }
+  
   function toggleMenuProfile() {
     setIsMenuProfileOpen(!isMenuProfileOpen);
   }
@@ -27,24 +29,30 @@ function NavBar() {
   const user = {
     name: "Jhon Doe",
     email: "JhonDoe@example.com",
-    imageUrl:
-      "https://xsgames.co/randomusers/avatar.php?g=male",
+    imageUrl: "https://xsgames.co/randomusers/avatar.php?g=male",
   };
 
   const navigation = [
-    { name: "Home", href: "/", current: true },
+    { name: "Home", href: "/", current: false },
     { name: "Cadastro", href: "/CadastroClient", current: false },
     { name: "Cadastro do Pet", href: "/PetRegistration", current: false },
+    { name: "Gerar QR Code", href: "/gerar-qrcode", current: false },
     { name: "Contatos", href: "/Contato", current: false },
   ];
+  
   const loginRoute = [
-    { name: "Meus Pets", href: '/animais'  }
+    { name: "Meus Pets", href: "/animais" },
+    { name: "Gerar QR Code", href: "/gerar-qrcode" },
   ];
+  
   const userNavigation = [
     { name: "Perfil", href: "#" },
-    token ? { name: "Logout", href: '#', onClick: logout  } : { name: "Log in", href: '/Login', onClick: () =>  navigate('/Login') },
+    token
+      ? { name: "Logout", href: "#", onClick: logout }
+      : { name: "Log in", href: "/Login", onClick: () => navigate("/Login") },
   ];
-  if(token) userNavigation.push(...loginRoute)
+  
+  if (token) userNavigation.push(...loginRoute);
 
   return (
     <>
@@ -55,14 +63,9 @@ function NavBar() {
               <div className="flex items-cente justify-between">
                 <div className="shrink-0">
                   <Link to="/">
-                    <img
-                      alt="Your Company"
-                      src={MeuPet}
-                      className="size-16"
-                    />
+                    <img alt="Your Company" src={MeuPet} className="size-16" />
                   </Link>
                 </div>
-                
               </div>
               {/* LINKS ESPANDIDOS DO NAV */}
               <div className="hidden md:block">
@@ -71,7 +74,6 @@ function NavBar() {
                     <Link
                       key={item.name}
                       to={item.href}
-                      
                       aria-current={item.current ? "page" : undefined}
                       className={classNames(
                         item.current
@@ -87,40 +89,40 @@ function NavBar() {
               </div>
               {/*FIM DOS LINKS ESPANDIDOS */}
 
-
               {/* SECTION DIREITA DA IMAGEM DO USER/SINO */}
               <div className="hidden md:block">
-               <div className="ml-4 flex items-center md:ml-6">
-
+                <div className="ml-4 flex items-center md:ml-6">
                   <div className="relative ml-3 flex items-center gap-1">
                     {token ? (
-                    <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-3">
+                        <button
+                          type="button"
+                          className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        >
+                          <FaRegBell className="size-5 font-light" />
+                        </button>
+                        <div className="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                          <img
+                            alt="IMG"
+                            src={user.imageUrl}
+                            onClick={toggleMenu}
+                            className="size-8 rounded-full cursor-pointer"
+                          />
+                        </div>
+                        <p className="text-md text-white">
+                          {profile &&
+                            profile.name &&
+                            profile.name.split(" ")[0]}
+                        </p>
+                      </div>
+                    ) : (
                       <button
                         type="button"
-                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        className="capitalize rounded-md bg-yellow-400 px-3 py-2 text-sm font-semibold text-blue-600 shadow-xs hover:bg-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-yellow-400"
                       >
-                        <FaRegBell className="size-5 font-light" />
+                        <Link to="/Login">login</Link>
                       </button>
-                      <div className="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-                        <img
-                          alt="IMG"
-                          src={user.imageUrl}
-                          onClick={toggleMenu}
-                          className="size-8 rounded-full cursor-pointer"
-                        />
-                      </div>
-                      <p className="text-md text-white">{profile && profile.name && profile.name.split(' ')[0]}</p>
-                    </div>
-                    ) :
-                    ( <button
-                      type="button"
-                      className="capitalize rounded-md bg-yellow-400 px-3 py-2 text-sm font-semibold text-blue-600 shadow-xs hover:bg-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-yellow-400"
-                    >
-                      <Link to="/Login">
-                        login
-                      </Link>
-                      </button>)
-                    }
+                    )}
                     {isMenuOpen && (
                       <div
                         transition
@@ -129,7 +131,7 @@ function NavBar() {
                         {userNavigation.map((item) => (
                           <div key={item.name}>
                             <Link
-                              onClick={e => item.onClick && item.onClick() }
+                              onClick={(e) => item.onClick && item.onClick()}
                               to={item.href}
                               className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                             >
@@ -150,8 +152,13 @@ function NavBar() {
                 <button
                   onClick={toggleMenu}
                   className="group relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 
-                  focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-                  {isMenuOpen ? <IoCloseSharp className=" scale-150"/>: <MdMenu className=" scale-150"/>}
+                  focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                >
+                  {isMenuOpen ? (
+                    <IoCloseSharp className=" scale-150" />
+                  ) : (
+                    <MdMenu className=" scale-150" />
+                  )}
                 </button>
               </div>
             </div>
@@ -160,23 +167,29 @@ function NavBar() {
           <div className="md:hidden">
             {/* MENU ESPANCIVEL PELO HAMBURGUER */}
 
-            {isMenuOpen && ( <div className={`space-y-1 px-2 pt-2 pb-3 sm:px-3 ${isMenuOpen ? 'h-auto opacity-100' : 'h-0 opacity-0'} overflow-hidden transition-all duration-500 ease-out `}>
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  aria-current={item.current ? "page" : undefined}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>)}
+            {isMenuOpen && (
+              <div
+                className={`space-y-1 px-2 pt-2 pb-3 sm:px-3 ${
+                  isMenuOpen ? "h-auto opacity-100" : "h-0 opacity-0"
+                } overflow-hidden transition-all duration-500 ease-out `}
+              >
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    aria-current={item.current ? "page" : undefined}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block rounded-md px-3 py-2 text-base font-medium"
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
             <div className="border-t border-gray-700 pt-4 pb-3">
               <div className="flex items-center px-5">
                 <div className="shrink-0">
@@ -205,20 +218,20 @@ function NavBar() {
                 </button>
               </div>
               {/* MENU ESPANDIDO AO CLIACAR NA IMAGEM */}
-              {isMenuProfileOpen &&
-              (<div className="mt-3 space-y-1 px-2">
-                {userNavigation.map((item) => (
-                  <button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                  >
-                    {item.name}
-                  </button>
-                ))}
-              </div>)
-              }
+              {isMenuProfileOpen && (
+                <div className="mt-3 space-y-1 px-2">
+                  {userNavigation.map((item) => (
+                    <button
+                      key={item.name}
+                      as="a"
+                      href={item.href}
+                      className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                    >
+                      {item.name}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </nav>

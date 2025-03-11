@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import Login from "../pages/login";
 import CadastroClient from "../pages/cadastroClient";
@@ -10,6 +10,9 @@ import Contato from "../pages/contato";
 import SaibaMais from "../pages/saibaMais";
 import { useAuthentication } from "../context/AuthContext";
 import ListPets from "../pages/ListPets";
+import QRCodeGenerator from "../pages/QRCodeGenerator";
+import PetFoundPage from "../pages/PetFoundPage";
+
 export const ProtectedRoute = ({ children }) => {
     const { token } = useAuthentication();
     if (!token) {
@@ -17,6 +20,7 @@ export const ProtectedRoute = ({ children }) => {
     }
     return children;
 };
+
 const RoutesOfPage = () => {
     return (
         <Routes>
@@ -39,6 +43,16 @@ const RoutesOfPage = () => {
                 }
                 path="/animais"
             />
+            <Route 
+                element={
+                    <ProtectedRoute>
+                        <QRCodeGenerator />
+                    </ProtectedRoute>
+                }
+                path="/gerar-qrcode"
+            />
+            {/* Rota pública para quando alguém escaneia o QR Code */}
+            <Route element={<PetFoundPage />} path="/public/pet/find/:hashCode" />
             <Route element={<Login />} path="/Login" />
         </Routes>
     )

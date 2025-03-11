@@ -7,4 +7,13 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.js',
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api.yuresamarone.shop',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })

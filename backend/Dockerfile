@@ -12,7 +12,7 @@ COPY settings.gradle .
 COPY src ./src
 
 # Baixa as dependências e constrói o projeto (ignorando os testes)
-RUN ./gradlew build -x test --no-daemon
+RUN gradle build -x test --no-daemon --stacktrace
 
 # Etapa de execução: usa uma imagem leve do OpenJDK para rodar a aplicação
 FROM openjdk:17-jdk-alpine
